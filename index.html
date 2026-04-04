@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AX Training - Prompt Optimizer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- CodeMirror CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-light.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap">
+  <!-- CodeMirror JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/markdown/markdown.min.js"></script>
+  <!-- Tesseract.js for OCR -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@7/dist/tesseract.min.js"></script>
+  <!-- PDF.js for rendering PDF pages -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <style>
+    .CodeMirror {
+      height: 400px;
+      border-radius: 0.5rem;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .CodeMirror-scroll {
+      overflow-y: auto;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .tab-active {
+      background-color: #eff6ff;
+      color: #3b82f6;
+      font-weight: 600;
+      border-top: 2px solid #3b82f6;
+    }
+    .preview-container {
+      max-height: 600px;
+      overflow-y: auto;
+    }
+    .tab-button {
+      border-top: 2px solid transparent;
+    }
+    .main-wrapper {
+      margin-left: 0;
+      margin-right: 0;
+      max-width: 100%;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div class="main-wrapper py-8">
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">Prompt Optimizer</h1>
+      <p class="text-gray-600">Input your initial prompt below and optimize it with AI assistance.</p>
+    </header>
+
+    <main>
+      <!-- Prompt Editor Section -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div class="flex items-center justify-between mb-4">
+          <label class="text-lg font-semibold text-gray-700">Initial Prompt</label>
+          <div class="flex gap-2">
+            <button id="optimizeBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition-colors">
+              Optimize
+            </button>
+            <button id="clearBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded transition-colors">
+              Clear
+            </button>
+          </div>
+        </div>
+        <textarea id="promptInput"></textarea>
+        <p class="text-sm text-gray-500 mt-2">Supports Markdown syntax with live preview</p>
+      </div>
+
+      <!-- File Upload Section -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="flex items-center justify-between mb-4">
+          <label class="text-lg font-semibold text-gray-700">File Preview</label>
+          <div class="flex gap-2">
+            <input type="file" id="fileInput" multiple accept="image/*,.pdf" class="hidden">
+            <button id="uploadBtn" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded transition-colors flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+              </svg>
+              Upload Files
+            </button>
+          </div>
+        </div>
+        
+        <!-- Tabs -->
+        <div id="tabsContainer" class="hidden">
+          <div class="flex flex-col bg-gray-50 rounded-lg overflow-hidden">
+            <!-- Horizontal tabs bar at top -->
+            <div id="tabsBar" class="flex bg-white border-b border-gray-200 overflow-x-auto" style="min-height: 36px;">
+              <!-- Tabs will be inserted here dynamically -->
+            </div>
+            <!-- Content area below tabs -->
+            <div class="flex-1 flex gap-4 bg-gray-50 rounded-b-lg p-4" style="min-height: 600px;">
+              <!-- Preview content -->
+              <div id="previewContainer" class="flex-1 bg-white rounded-lg p-4 overflow-y-auto border border-gray-200" style="max-height: 600px;">
+              </div>
+              <!-- OCR extracted text -->
+              <div id="ocrContainer" class="flex-1 bg-white rounded-lg p-4 overflow-y-auto border border-gray-200" style="max-height: 600px;">
+                <div id="ocrPlaceholder" class="text-center py-12 text-gray-400">
+                  <svg class="w-12 h-12 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  </svg>
+                  <p>OCR text will appear here</p>
+                  <p class="text-xs mt-1">Extracted automatically after upload</p>
+                </div>
+                <div id="ocrContent" class="hidden">
+                  <div class="flex items-center justify-between mb-2">
+                    <h3 class="font-semibold text-gray-700">Extracted Text</h3>
+                    <button id="copyOcrBtn" class="text-sm text-blue-600 hover:text-blue-800 transition-colors">
+                      Copy
+                    </button>
+                  </div>
+                  <div id="ocrText" class="whitespace-pre-wrap text-sm text-gray-700 font-mono bg-gray-50 p-3 rounded border border-gray-100 min-h-[200px]"></div>
+                  <div id="ocrStatus" class="text-xs text-gray-500 mt-2"></div>
+                </div>
+              </div>
+              <!-- Ground truth editor -->
+              <div id="groundTruthContainer" class="flex-1 bg-white rounded-lg p-4 overflow-y-auto border border-gray-200" style="max-height: 600px;">
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="font-semibold text-gray-700">Ground Truth</h3>
+                  <div class="flex gap-2">
+                    <button id="copyGroundTruthBtn" class="text-sm text-blue-600 hover:text-blue-800 transition-colors">
+                      Copy
+                    </button>
+                    <button id="clearGroundTruthBtn" class="text-sm text-red-600 hover:text-red-800 transition-colors">
+                      Clear
+                    </button>
+                  </div>
+                </div>
+                <textarea id="groundTruthEditor"></textarea>
+                <p class="text-xs text-gray-500 mt-2">Enter ground truth data for comparison</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="uploadPlaceholder" class="text-center py-12 text-gray-400">
+          <svg class="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+          </svg>
+          <p>Click the button above to upload images or PDF files</p>
+          <p class="text-sm mt-2">Supports multiple file selection, images/PDF format</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // File upload and preview functionality
+    const fileInput = document.getElementById('fileInput');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const tabsContainer = document.getElementById('tabsContainer');
+    const tabsBar = document.getElementById('tabsBar');
+    const previewContainer = document.getElementById('previewContainer');
+    const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+    const ocrPlaceholder = document.getElementById('ocrPlaceholder');
+    const ocrContent = document.getElementById('ocrContent');
+    const ocrText = document.getElementById('ocrText');
+    const ocrStatus = document.getElementById('ocrStatus');
+    const copyOcrBtn = document.getElementById('copyOcrBtn');
+    const copyGroundTruthBtn = document.getElementById('copyGroundTruthBtn');
+    const clearGroundTruthBtn = document.getElementById('clearGroundTruthBtn');
+
+    let files = [];
+    let activeTab = 0;
+    let ocrResults = {}; // Store OCR results per file index
+    let groundTruthData = {}; // Store ground truth data per file index
+    let pdfPageImages = {}; // Store PDF page images per file index: { fileIndex: [ {dataUrl, pageNum}, ... ] }
+    let pdfPreviews = {}; // Store PDF preview embed URLs
+
+    // Ground truth editor
+    let groundTruthEditor = null;
+
+    // Set pdf.js worker
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    // Upload button click
+    uploadBtn.addEventListener('click', () => {
+      fileInput.click();
+    });
+
+    // File input change
+    fileInput.addEventListener('change', async (e) => {
+      const selectedFiles = Array.from(e.target.files);
+      if (selectedFiles.length === 0) return;
+
+      // Add new files to the existing list instead of replacing
+      const startIndex = files.length;
+      const newFiles = selectedFiles.map((file, index) => ({
+        file,
+        name: file.name,
+        type: file.type,
+        url: URL.createObjectURL(file),
+        size: (file.size / 1024).toFixed(2) + ' KB'
+      }));
+
+      files = files.concat(newFiles);
+
+      // Set active tab to the first newly added file
+      if (files.length === newFiles.length) {
+        activeTab = 0;
+      } else {
+        activeTab = files.length - newFiles.length;
+      }
+
+      renderTabs();
+      renderPreview();
+
+      tabsContainer.classList.remove('hidden');
+      uploadPlaceholder.classList.add('hidden');
+
+      // Reset file input
+      fileInput.value = '';
+
+      // Process each new file
+      for (let i = 0; i < newFiles.length; i++) {
+        const fileIndex = startIndex + i;
+        const fileData = newFiles[i];
+
+        if (fileData.type === 'application/pdf') {
+          await processPDF(fileData, fileIndex);
+        } else if (fileData.type.startsWith('image/')) {
+          await runOCR(fileData, fileIndex);
+        } else {
+          ocrResults[fileIndex] = { text: 'File type not supported for OCR.', status: 'info' };
+          updateOCRDisplay();
+        }
+      }
+    });
+
+    // Render tabs
+    function renderTabs() {
+      tabsBar.innerHTML = files.map((file, index) => `
+        <button
+          class="tab tab-button flex-shrink-0 px-3 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-50 transition-colors border-r border-gray-100 ${index === activeTab ? 'tab-active' : ''}"
+          onclick="switchTab(${index})"
+        >
+          <div class="flex items-center gap-1.5">
+            <span class="text-sm">${getFileIcon(file.type)}</span>
+            <div class="min-w-0">
+              <div class="truncate max-w-[120px]">${file.name}</div>
+            </div>
+          </div>
+        </button>
+      `).join('');
+    }
+
+    // Get file icon based on type
+    function getFileIcon(type) {
+      if (type.startsWith('image/')) {
+        return '🖼️';
+      } else if (type === 'application/pdf') {
+        return '📄';
+      }
+      return '📁';
+    }
+
+    // Switch tab
+    function switchTab(index) {
+      activeTab = index;
+      renderTabs();
+      renderPreview();
+    }
+
+    // Render preview
+    function renderPreview() {
+      if (files.length === 0) return;
+
+      const file = files[activeTab];
+
+      if (file.type.startsWith('image/')) {
+        previewContainer.innerHTML = `
+          <div class="text-center">
+            <img src="${file.url}" alt="${file.name}" class="max-w-full h-auto rounded-lg shadow-md mx-auto">
+            <p class="text-sm text-gray-500 mt-4">${file.name} (${file.size})</p>
+          </div>
+        `;
+      } else if (file.type === 'application/pdf') {
+        // Show PDF pages as images if available
+        const pageImages = pdfPageImages[activeTab];
+        if (pageImages && pageImages.length > 0) {
+          const imagesHtml = pageImages.map(({ dataUrl, pageNum }) => `
+            <div class="mb-4">
+              <p class="text-sm font-medium text-gray-600 mb-2">Page ${pageNum}</p>
+              <img src="${dataUrl}" alt="Page ${pageNum}" class="max-w-full h-auto rounded-lg shadow-md mx-auto">
+            </div>
+          `).join('');
+          
+          previewContainer.innerHTML = `
+            <div class="text-center">
+              ${imagesHtml}
+              <p class="text-sm text-gray-500 mt-4">${file.name} (${file.size}) - ${pageImages.length} page(s)</p>
+            </div>
+          `;
+        } else {
+          // Fallback to embed
+          previewContainer.innerHTML = `
+            <div class="w-full">
+              <embed src="${file.url}" type="application/pdf" width="100%" height="600px" class="rounded-lg">
+              <p class="text-sm text-gray-500 mt-2 text-center">${file.name} (${file.size})</p>
+            </div>
+          `;
+        }
+      } else {
+        previewContainer.innerHTML = `
+          <div class="text-center py-12 text-gray-500">
+            <p>File type not supported for preview</p>
+            <p class="text-sm mt-2">${file.name} (${file.size})</p>
+          </div>
+        `;
+      }
+    }
+
+    // Make switchTab available globally
+    window.switchTab = switchTab;
+
+    // Initialize Ground Truth CodeMirror editor
+    groundTruthEditor = CodeMirror.fromTextArea(document.getElementById('groundTruthEditor'), {
+      mode: 'markdown',
+      theme: 'material-light',
+      lineNumbers: true,
+      lineWrapping: true,
+      placeholder: 'Enter ground truth data here...\n\n# You can use Markdown\n\n- Lists\n- **Bold text**\n- *Italic text*',
+    });
+
+    // Save ground truth data when editor changes
+    groundTruthEditor.on('change', () => {
+      if (files.length > 0) {
+        groundTruthData[activeTab] = groundTruthEditor.getValue();
+      }
+    });
+
+    // Copy ground truth button
+    copyGroundTruthBtn.addEventListener('click', () => {
+      const text = groundTruthEditor.getValue();
+      if (!text.trim()) return;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = copyGroundTruthBtn.textContent;
+        copyGroundTruthBtn.textContent = 'Copied!';
+        setTimeout(() => {
+          copyGroundTruthBtn.textContent = originalText;
+        }, 2000);
+      });
+    });
+
+    // Clear ground truth button
+    clearGroundTruthBtn.addEventListener('click', () => {
+      groundTruthEditor.setValue('');
+      if (files.length > 0) {
+        groundTruthData[activeTab] = '';
+      }
+      groundTruthEditor.focus();
+    });
+
+    // Process PDF file: render pages to images and OCR each page
+    async function processPDF(fileData, fileIndex) {
+      ocrStatus.textContent = 'Loading PDF...';
+      ocrPlaceholder.classList.add('hidden');
+      ocrContent.classList.remove('hidden');
+      ocrText.textContent = '';
+
+      try {
+        const arrayBuffer = await fileData.file.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        const numPages = pdf.numPages;
+
+        let accumulatedText = '';
+        pdfPageImages[fileIndex] = [];
+
+        // Store the PDF URL for preview
+        pdfPreviews[fileIndex] = fileData.url;
+
+        for (let pageNum = 1; pageNum <= numPages; pageNum++) {
+          ocrStatus.textContent = `Processing page ${pageNum}/${numPages}...`;
+
+          // Render page to canvas
+          const page = await pdf.getPage(pageNum);
+          const viewport = page.getViewport({ scale: 2.0 });
+          const canvas = document.createElement('canvas');
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          const ctx = canvas.getContext('2d');
+
+          await page.render({ canvasContext: ctx, viewport }).promise;
+
+          // Get image data URL for OCR
+          const dataUrl = canvas.toDataURL('image/png');
+          pdfPageImages[fileIndex].push({ dataUrl, pageNum });
+
+          // Run OCR on this page
+          const result = await Tesseract.recognize(dataUrl, 'eng', {
+            logger: (m) => {
+              if (m.status === 'recognizing text') {
+                ocrStatus.textContent = `Page ${pageNum}/${numPages} - OCR ${(m.progress * 100).toFixed(0)}%`;
+              }
+            }
+          });
+
+          // Append page text immediately
+          const pageText = result.data.text || '[No text found on this page]';
+          const pageHeader = `============= page ${pageNum} ==============`;
+          if (accumulatedText) {
+            accumulatedText += '\n\n' + pageHeader + '\n' + pageText;
+          } else {
+            accumulatedText = pageHeader + '\n' + pageText;
+          }
+
+          // Update display immediately as each page completes
+          ocrText.textContent = accumulatedText;
+          ocrStatus.textContent = `Page ${pageNum}/${numPages} done`;
+
+          // Scroll to bottom of OCR text area
+          const ocrTextContainer = document.getElementById('ocrText');
+          if (ocrTextContainer.parentElement) {
+            ocrTextContainer.parentElement.scrollTop = ocrTextContainer.parentElement.scrollHeight;
+          }
+        }
+
+        ocrResults[fileIndex] = {
+          text: accumulatedText,
+          status: 'success',
+          pageCount: numPages
+        };
+        ocrStatus.textContent = `Done! ${numPages} page(s) processed`;
+      } catch (error) {
+        console.error('PDF processing error:', error);
+        ocrResults[fileIndex] = {
+          text: ocrText.textContent || `Error processing PDF: ${error.message}`,
+          status: 'error'
+        };
+        ocrStatus.textContent = 'PDF processing failed.';
+      }
+
+      renderPreview();
+    }
+
+    // Run OCR on uploaded file
+    async function runOCR(fileData, fileIndex) {
+      // Only process images for now
+      if (!fileData.type.startsWith('image/')) {
+        ocrResults[fileIndex] = { text: 'OCR is only available for image files.', status: 'info' };
+        updateOCRDisplay();
+        return;
+      }
+
+      // Show loading state
+      ocrStatus.textContent = 'Processing with Tesseract.js...';
+      ocrPlaceholder.classList.add('hidden');
+      ocrContent.classList.remove('hidden');
+      ocrText.textContent = '';
+
+      try {
+        const result = await Tesseract.recognize(fileData.url, 'eng', {
+          logger: (m) => {
+            if (m.status === 'recognizing text') {
+              ocrStatus.textContent = `Processing... ${(m.progress * 100).toFixed(0)}%`;
+            }
+          }
+        });
+
+        ocrResults[fileIndex] = {
+          text: result.data.text || 'No text found in this image.',
+          status: 'success',
+          confidence: result.data.confidence
+        };
+        ocrStatus.textContent = `Confidence: ${result.data.confidence.toFixed(1)}%`;
+      } catch (error) {
+        console.error('OCR error:', error);
+        ocrResults[fileIndex] = {
+          text: `Error: ${error.message}`,
+          status: 'error'
+        };
+        ocrStatus.textContent = 'OCR failed. Try another image.';
+      }
+
+      updateOCRDisplay();
+    }
+
+    // Update OCR display for current tab
+    function updateOCRDisplay() {
+      if (files.length === 0) return;
+
+      const result = ocrResults[activeTab];
+      if (!result) {
+        ocrPlaceholder.classList.remove('hidden');
+        ocrContent.classList.add('hidden');
+        return;
+      }
+
+      ocrPlaceholder.classList.add('hidden');
+      ocrContent.classList.remove('hidden');
+      ocrText.textContent = result.text;
+
+      if (result.status === 'error') {
+        ocrText.classList.add('text-red-600');
+        ocrText.classList.remove('text-gray-700');
+      } else {
+        ocrText.classList.remove('text-red-600');
+        ocrText.classList.add('text-gray-700');
+      }
+    }
+
+    // Update ground truth display for current tab
+    function updateGroundTruthDisplay() {
+      if (!groundTruthEditor) return;
+
+      const currentValue = groundTruthEditor.getValue();
+      const savedValue = groundTruthData[activeTab] || '';
+
+      // Only update if the value is different (to avoid triggering change event unnecessarily)
+      if (currentValue !== savedValue) {
+        groundTruthEditor.setValue(savedValue);
+      }
+    }
+
+    // Copy OCR text
+    copyOcrBtn.addEventListener('click', () => {
+      const text = ocrText.textContent;
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = copyOcrBtn.textContent;
+        copyOcrBtn.textContent = 'Copied!';
+        setTimeout(() => {
+          copyOcrBtn.textContent = originalText;
+        }, 2000);
+      });
+    });
+
+    // Update switchTab to also update OCR display
+    function switchTab(index) {
+      activeTab = index;
+      renderTabs();
+      renderPreview();
+      updateOCRDisplay();
+      updateGroundTruthDisplay();
+    }
+
+    // Initialize CodeMirror with Markdown mode
+    const editor = CodeMirror.fromTextArea(document.getElementById('promptInput'), {
+      mode: 'markdown',
+      theme: 'material-light',
+      lineNumbers: true,
+      lineWrapping: true,
+      placeholder: 'Enter your prompt here...\n\n# You can use Markdown\n\n- Lists\n- **Bold text**\n- *Italic text*\n\n```\nCode blocks\n```',
+    });
+
+    // Optimize button
+    document.getElementById('optimizeBtn').addEventListener('click', () => {
+      const content = editor.getValue();
+      if (!content.trim()) {
+        alert('Please enter a prompt first');
+        return;
+      }
+      // TODO: Implement optimization logic
+      console.log('Optimizing prompt:', content);
+    });
+
+    // Clear button
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      editor.setValue('');
+      editor.focus();
+    });
+  </script>
+</body>
+</html>

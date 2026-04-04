@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "skills": {
+    "frontend-design-review": {
+      "source": "microsoft/skills",
+      "sourceType": "github",
+      "computedHash": "bdfcadec9604ec0225f337ffbcecb8c8a5ddf69b6b1a1335963df97a0665472e"
+    },
+    "mcp-builder": {
+      "source": "microsoft/skills",
+      "sourceType": "github",
+      "computedHash": "da280c26ceee48533ce8b39e5492d81b4a74b65732988cafc50668371dfeb525"
+    },
+    "skill-creator": {
+      "source": "microsoft/skills",
+      "sourceType": "github",
+      "computedHash": "5a4851efe2b68b3178075e630a26815c9f665d4ceb5fc224a33259f6d636a31e"
+    }
+  }
+}

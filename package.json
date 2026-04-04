@@ -1,0 +1,17 @@
+{
+  "type": "module",
+  "scripts": {
+    "start": "node --loader ts-node/esm server.ts",
+    "dev": "node --loader ts-node/esm --watch server.ts"
+  },
+  "dependencies": {
+    "@ax-llm/ax": "^19.0.41",
+    "pdf2pic": "^3.2.0",
+    "tesseract.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  }
+}
