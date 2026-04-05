@@ -12,6 +12,8 @@
   <!-- CodeMirror JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/markdown/markdown.min.js"></script>
+  <!-- Marked.js for markdown rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <!-- Tesseract.js for OCR -->
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@7/dist/tesseract.min.js"></script>
   <!-- PDF.js for rendering PDF pages -->
@@ -73,8 +75,38 @@
             </button>
           </div>
         </div>
-        <textarea id="promptInput"></textarea>
-        <p class="text-sm text-gray-500 mt-2">Supports Markdown syntax with live preview</p>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="col-span-1">
+            <textarea id="promptInput"></textarea>
+            <p class="text-sm text-gray-500 mt-2">Supports Markdown syntax with live preview</p>
+          </div>
+          <div class="col-span-1">
+            <label class="text-sm font-semibold text-gray-700 mb-2 block">Signatures</label>
+            <textarea id="signaturesInput"></textarea>
+            <p class="text-sm text-gray-500 mt-2">Specify signatures for optimization (Markdown supported)</p>
+          </div>
+          <div class="col-span-1">
+            <label class="text-sm font-semibold text-gray-700 mb-2 block">Optimized Prompt</label>
+            <div id="optimizedPromptDisplay" class="bg-gray-50 border border-gray-200 rounded-lg p-4 min-h-[400px] overflow-y-auto">
+              <div id="optimizedPromptPlaceholder" class="text-center py-12 text-gray-400">
+                <svg class="w-12 h-12 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+                <p>Optimized prompt will appear here</p>
+                <p class="text-xs mt-1">Click "Optimize" to generate</p>
+              </div>
+              <div id="optimizedPromptContent" class="hidden">
+                <div class="flex items-center justify-between mb-3">
+                  <span id="optimizeScore" class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded"></span>
+                  <button id="copyOptimizedBtn" class="text-sm text-blue-600 hover:text-blue-800 transition-colors">
+                    Copy
+                  </button>
+                </div>
+                <div id="optimizedPromptText" class="prose prose-sm max-w-none text-gray-700"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- File Upload Section -->
@@ -554,21 +586,149 @@
       placeholder: 'Enter your prompt here...\n\n# You can use Markdown\n\n- Lists\n- **Bold text**\n- *Italic text*\n\n```\nCode blocks\n```',
     });
 
+    // Initialize Signatures CodeMirror editor
+    const signaturesEditor = CodeMirror.fromTextArea(document.getElementById('signaturesInput'), {
+      mode: 'markdown',
+      theme: 'material-light',
+      lineNumbers: true,
+      lineWrapping: true,
+      placeholder: 'Enter signatures here...\n\n# Example signatures\n\n- signature1\n- signature2\n- signature3',
+    });
+
     // Optimize button
-    document.getElementById('optimizeBtn').addEventListener('click', () => {
-      const content = editor.getValue();
-      if (!content.trim()) {
+    document.getElementById('optimizeBtn').addEventListener('click', async () => {
+      const systemPrompt = editor.getValue();
+      if (!systemPrompt.trim()) {
         alert('Please enter a prompt first');
         return;
       }
-      // TODO: Implement optimization logic
-      console.log('Optimizing prompt:', content);
+
+      // Collect signatures
+      const signatures = signaturesEditor.getValue();
+
+      // Collect examples from each tab
+      const examples = files.map((file, index) => {
+        const ocrResult = ocrResults[index] || { text: '' };
+        const groundTruth = groundTruthData[index] || '';
+        
+        return {
+          filename: file.name,
+          text: ocrResult.text,
+          groundTruth: groundTruth
+        };
+      });
+
+      // Construct request payload
+      const payload = {
+        systemPrompt: systemPrompt,
+        signatures: signatures,
+        examples: examples
+      };
+
+      console.log('Sending optimization request:', payload);
+
+      // Disable button and show loading state
+      const optimizeBtn = document.getElementById('optimizeBtn');
+      const originalText = optimizeBtn.textContent;
+      optimizeBtn.disabled = true;
+      optimizeBtn.textContent = 'Optimizing...';
+      optimizeBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+      // Show loading state in optimized prompt area
+      const optimizedPromptPlaceholder = document.getElementById('optimizedPromptPlaceholder');
+      const optimizedPromptContent = document.getElementById('optimizedPromptContent');
+      optimizedPromptPlaceholder.innerHTML = `
+        <div class="flex flex-col items-center justify-center py-12">
+          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-3"></div>
+          <p class="text-gray-500">Optimizing prompt...</p>
+          <p class="text-xs text-gray-400 mt-1">This may take a moment</p>
+        </div>
+      `;
+      optimizedPromptPlaceholder.classList.remove('hidden');
+      optimizedPromptContent.classList.add('hidden');
+
+      try {
+        const response = await fetch('/optimize', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Optimization failed');
+        }
+
+        console.log('Optimization result:', result);
+
+        if (result.success) {
+          // Display optimized prompt
+          optimizedPromptPlaceholder.classList.add('hidden');
+          optimizedPromptContent.classList.remove('hidden');
+
+          const optimizedPromptText = document.getElementById('optimizedPromptText');
+          const optimizeScore = document.getElementById('optimizeScore');
+
+          // Render markdown (simple conversion for now)
+          optimizedPromptText.innerHTML = marked.parse(result.optimizedPrompt);
+          optimizeScore.textContent = `Score: ${(result.bestScore * 100).toFixed(1)}% | Trials: ${result.numTrials}`;
+
+          // Store for copy
+          window.optimizedPromptRaw = result.optimizedPrompt;
+
+          alert(`Optimization complete!\nBest score: ${(result.bestScore * 100).toFixed(1)}%\nTrials: ${result.numTrials}`);
+        } else {
+          alert('Optimization failed: ' + result.error);
+          optimizedPromptPlaceholder.innerHTML = `
+            <div class="text-center py-12 text-red-500">
+              <svg class="w-12 h-12 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <p>Optimization failed</p>
+              <p class="text-xs mt-1">${result.error}</p>
+            </div>
+          `;
+        }
+      } catch (error) {
+        console.error('Optimization error:', error);
+        alert('Error during optimization: ' + error.message);
+        optimizedPromptPlaceholder.innerHTML = `
+          <div class="text-center py-12 text-red-500">
+            <svg class="w-12 h-12 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <p>Error</p>
+            <p class="text-xs mt-1">${error.message}</p>
+          </div>
+        `;
+      } finally {
+        // Restore button state
+        optimizeBtn.disabled = false;
+        optimizeBtn.textContent = originalText;
+        optimizeBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
     });
 
     // Clear button
     document.getElementById('clearBtn').addEventListener('click', () => {
       editor.setValue('');
+      signaturesEditor.setValue('');
       editor.focus();
+    });
+
+    // Copy optimized prompt button
+    document.getElementById('copyOptimizedBtn').addEventListener('click', () => {
+      const text = window.optimizedPromptRaw || '';
+      if (!text.trim()) return;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copyOptimizedBtn');
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.textContent = originalText;
+        }, 2000);
+      });
     });
   </script>
 </body>

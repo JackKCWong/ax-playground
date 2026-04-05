@@ -6,7 +6,12 @@
       "Bash(timeout *)",
       "Bash(curl *)",
       "Bash(powershell *)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(npm start)",
+      "Bash(tasklist *)",
+      "Bash(findstr *)",
+      "Bash(npx *)",
+      "Bash(npm uninstall *)"
     ]
   },
   "$version": 3
