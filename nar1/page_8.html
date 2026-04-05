@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NAR1 Form - Page 8</title>
+  <style>
+    @page { size: A4; margin: 15mm; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Microsoft YaHei", "SimHei", Arial, sans-serif;
+      font-size: 10pt; line-height: 1.4; color: #000;
+      width: 210mm; min-height: 297mm; padding: 15mm; margin: 0 auto;
+    }
+    .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
+    .form-title { display: flex; align-items: center; gap: 10px; }
+    .form-title .label { font-size: 10pt; line-height: 1.3; }
+    .form-title .form-number { font-size: 24pt; font-weight: bold; }
+    .business-reg { text-align: right; }
+    .business-reg .label { font-size: 9pt; margin-bottom: 2px; }
+    .business-reg .input-box { width: 180px; height: 26px; border: 1px solid #000; }
+    .section { margin-bottom: 12px; }
+    .section-title { margin-bottom: 3px; }
+    .section-title .number { font-weight: bold; }
+    .section-title .zh { margin-right: 5px; }
+    .section-title .en { font-weight: bold; }
+    .section-subtitle { font-size: 9pt; margin-bottom: 8px; }
+    .section-subtitle .zh { margin-right: 5px; }
+    .section-subtitle .en { font-style: italic; }
+    .field-row { display: flex; align-items: flex-start; margin-bottom: 6px; gap: 5px; }
+    .field-label { min-width: 140px; font-size: 9pt; }
+    .field-label .zh { display: block; }
+    .field-label .en { display: block; font-weight: bold; }
+    .checkbox-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+    .checkbox { width: 14px; height: 14px; border: 1px solid #000; flex-shrink: 0; margin-top: 3px; }
+    .checkbox-label { font-size: 9pt; }
+    .checkbox-label .zh { display: block; }
+    .checkbox-label .en { display: block; font-style: italic; }
+    .records-table { width: 100%; border-collapse: collapse; margin-top: 5px; }
+    .records-table th, .records-table td { border: 1px solid #000; padding: 5px; text-align: center; font-size: 9pt; }
+    .records-table th { font-weight: bold; }
+    .records-table td { height: 60px; vertical-align: top; }
+    .statement-box { border: 1px solid #000; padding: 8px; margin-top: 8px; font-size: 9pt; line-height: 1.5; }
+    .advisory-box { border: 2px solid #000; padding: 8px; margin: 10px 0; font-size: 9pt; }
+    .advisory-box .title { font-weight: bold; text-align: center; margin-bottom: 5px; }
+    .continuation-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .continuation-table th, .continuation-table td { border: 1px solid #000; padding: 4px; text-align: center; font-size: 9pt; }
+    .continuation-table th { font-weight: bold; background: #f0f0f0; }
+    .signature-section { margin-top: 15px; }
+    .signature-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .signature-line { flex: 1; border-bottom: 1px solid #000; height: 20px; }
+    .footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 15px; font-size: 8pt; }
+    .qr-code { width: 45px; height: 45px; border: 1px solid #000; display: flex; align-items: center; justify-content: center; font-size: 6pt; margin-bottom: 3px; }
+    .field-number-circle { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #000; color: #fff; border-radius: 50%; font-size: 8pt; font-weight: bold; margin-right: 5px; vertical-align: middle; }
+    .note { font-size: 8pt; color: #666; }
+    .note .zh { margin-right: 5px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="form-title">
+      <div class="label"><div>表格</div><div>Form</div></div>
+      <div class="form-number">NAR1</div>
+    </div>
+    <div class="business-reg">
+      <div class="label"><div>商業登記號碼</div><div>Business Registration Number</div></div>
+      <div class="input-box" data-placeholder="business_registration_number"></div>
+    </div>
+  </div>
+
+  <!-- Section 14 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="field-number-circle">30</span>
+      <span class="number">14</span>
+      <span class="zh">有股本公司的成員詳情</span>
+      <span class="en">Particulars of Member(s) of a Company Having a Share Capital</span>
+    </div>
+    <div class="section-subtitle" style="font-style: italic; font-size: 8pt;">
+      <span class="zh">(有股本的公司必須填報此項</span>
+      <span class="en">Company having a share capital must complete this section)</span>
+    </div>
+    <div style="font-size: 8pt; margin-bottom: 5px;">
+      <span class="zh">請在適用的空格內加上 ✓ 號</span>
+      <span class="en">Please tick the relevant box</span>
+    </div>
+    <div class="checkbox-item">
+      <div class="checkbox"></div>
+      <div class="checkbox-label">
+        <span class="zh">非上市公司的成員詳情列於附表一</span>
+        <span class="en">Particulars of members of a non-listed company are listed in Schedule 1</span>
+      </div>
+    </div>
+    <div class="checkbox-item">
+      <div class="checkbox"></div>
+      <div class="checkbox-label">
+        <span class="zh">上市公司的成員詳情列於附表二</span>
+        <span class="en">Particulars of members of a listed company are listed in Schedule 2</span>
+      </div>
+    </div>
+    <div class="checkbox-item">
+      <div class="checkbox"></div>
+      <div class="checkbox-label">
+        <span class="zh">公司的成員詳情列於隨本表格附上的唯讀光碟或唯讀型數碼多功能光碟</span>
+        <span class="en">Particulars of members of the company are listed in the CD-ROM or DVD-ROM attached to this form</span>
+      </div>
+    </div>
+    <div class="note" style="margin-left: 22px;">
+      <span class="zh">(載於唯讀光碟或唯讀型數碼多功能光碟內的成員的詳情，會以 PDF 格式供公眾以電子方式查閱。</span>
+      <span class="en">Particulars of members recorded in the CD-ROM or DVD-ROM will be available for public search electronically in PDF format.)</span>
+    </div>
+  </div>
+
+  <!-- Section 15 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="field-number-circle">31</span>
+      <span class="number">15</span>
+      <span class="zh">公司紀錄</span>
+      <span class="en">Company Records</span>
+    </div>
+    <div class="section-subtitle" style="font-style: italic; font-size: 8pt;">
+      <span class="zh">(如空位不足，請用續頁 E 填報</span>
+      <span class="en">Use Continuation Sheet E if the space provided is insufficient)</span>
+    </div>
+    <div style="font-size: 9pt; margin-bottom: 5px;">
+      <span class="zh">公司備存下列紀錄的地址(如並非備存於第 6 項所述的註冊辦事處內)</span>
+      <span class="en">Address where the following company records are kept (if not kept at the registered office stated in Section 6)</span>
+    </div>
+    <table class="records-table">
+      <thead>
+        <tr>
+          <th style="width: 50%;">
+            <span class="zh">公司紀錄</span>
+            <span class="en">Company Records</span>
+          </th>
+          <th style="width: 50%;">
+            <span class="zh">地址</span>
+            <span class="en">Address</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-placeholder="company_records_type"></td>
+          <td data-placeholder="company_records_address"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section 16 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="number">16</span>
+      <span class="zh">陳述書</span>
+      <span class="en">Statement</span>
+    </div>
+    <div class="section-subtitle" style="font-style: italic; font-size: 8pt;">
+      <span class="zh">(如屬私人公司，請在空格內加上 ✓ 號以作出此項陳述</span>
+      <span class="en">For a private company, please tick the box to make the Statement)</span>
+    </div>
+    <div class="checkbox-item">
+      <div class="checkbox"></div>
+      <div class="statement-box">
+        <span class="zh">現述明公司自最近一份周年申報表的日期起(如屬首份周年申報表，而公司不是經遷冊公司，自公司成立為法團當日起；如公司是经遷冊公司，自其遷冊日起)，並沒有發出邀請，以邀請公眾人士認購公司的任何股份或債權證；同時如成員人數於本申報表的日期當日超過五十名，則超出五十名之數的成員，全屬根據《公司條例》第 11(2)條於計算公司成員人數時不包括在內的人。</span>
+        <span class="en">The company has not, since the date of the last annual return (or in the case of the first annual return, since the date of incorporation if the company is not a re-domiciled company or since the re-domiciliation date if the company is a re-domiciled company), issued any invitation to the public to subscribe for any shares or debentures of the company and that if the number of members of the company exceeds 50 as at the date of this return, the excess consists wholly of persons who, under section 11(2) of the Companies Ordinance, are excluded in the calculation of the number of members of the company.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Advisory Note -->
+  <div class="advisory-box">
+    <div class="title">
+      <span class="field-number-circle">32</span>
+      <span class="zh">提示</span>
+      <span class="en">Advisory Note</span>
+    </div>
+    <div>
+      <span class="zh">所有公司董事均應閱讀公司註冊處編製的《董事責任指引》，並熟悉該指引所概述的董事一般責任。</span>
+      <span class="en">All directors of the company are advised to read 'A Guide on Directors' Duties' published by the Companies Registry and acquaint themselves with the general duties of directors outlined in the Guide.</span>
+    </div>
+  </div>
+
+  <!-- Continuation Sheet Table -->
+  <div style="font-size: 9pt; margin-bottom: 5px;">
+    <span class="zh">本申報表包括下列續頁／附表</span>
+    <span class="en">This Return includes the following Continuation Sheet(s)/Schedule(s)</span>
+  </div>
+  <table class="continuation-table">
+    <thead>
+      <tr>
+        <th rowspan="2"></th>
+        <th colspan="5">
+          <span class="zh">續頁</span>
+          <span class="en">Continuation Sheet(s)</span>
+        </th>
+        <th rowspan="2">
+          <span class="zh">附表一</span>
+          <span class="en">Schedule 1</span>
+        </th>
+        <th rowspan="2">
+          <span class="zh">附表二</span>
+          <span class="en">Schedule 2</span>
+        </th>
+      </tr>
+      <tr>
+        <th>A</th><th>B</th><th>C</th><th>D</th><th>E</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-weight: bold;">
+          <span class="zh">頁數</span>
+          <span class="en">Number of pages</span>
+        </td>
+        <td data-placeholder="pages_a"></td>
+        <td data-placeholder="pages_b"></td>
+        <td data-placeholder="pages_c"></td>
+        <td data-placeholder="pages_d"></td>
+        <td data-placeholder="pages_e"></td>
+        <td data-placeholder="pages_schedule1"></td>
+        <td data-placeholder="pages_schedule2"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Signature -->
+  <div class="signature-section">
+    <div class="signature-row">
+      <span class="field-number-circle">6</span>
+      <span style="font-weight: bold;">
+        <span class="zh">簽署</span>
+        <span class="en">Signed</span>
+      </span>
+      <span>:</span>
+      <div class="signature-line" data-placeholder="signature"></div>
+    </div>
+    <div class="signature-row">
+      <span style="font-weight: bold;">
+        <span class="zh">姓名</span>
+        <span class="en">Name</span>
+      </span>
+      <span>:</span>
+      <div class="signature-line" data-placeholder="signatory_name"></div>
+      <span style="font-size: 8pt;">
+        <span class="zh">董事</span>
+        <span class="en">Director</span>
+        /
+        <span class="zh">公司秘書</span>
+        <span class="en">Company Secretary</span>
+        *
+      </span>
+    </div>
+    <div class="signature-row">
+      <span style="font-weight: bold;">
+        <span class="zh">日期</span>
+        <span class="en">Date</span>
+      </span>
+      <span>:</span>
+      <span style="font-size: 9pt;">
+        <span class="zh">日</span>
+        <span class="en">DD</span>
+      </span>
+      <div style="width: 40px; border-bottom: 1px solid #000;" data-placeholder="date_dd"></div>
+      <span style="font-size: 9pt;">
+        <span class="zh">/ 月</span>
+        <span class="en">MM</span>
+      </span>
+      <div style="width: 40px; border-bottom: 1px solid #000;" data-placeholder="date_mm"></div>
+      <span style="font-size: 9pt;">
+        <span class="zh">/ 年</span>
+        <span class="en">YYYY</span>
+      </span>
+      <div style="width: 60px; border-bottom: 1px solid #000;" data-placeholder="date_yyyy"></div>
+    </div>
+    <div class="note" style="margin-top: 5px;">
+      <span class="zh">* 請刪去不適用者</span>
+      <span class="en">Delete whichever does not apply</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>指明編號 2/2025 (2025 年 5 月) Specification No. 2/2025 (May 2025)</div>
+    <div style="text-align: right;">
+      <div class="qr-code">QR</div>
+      <div>第八頁 Page 8</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NAR1 Form - Continuation Sheet A</title>
+  <style>
+    @page { size: A4; margin: 15mm; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Microsoft YaHei", "SimHei", Arial, sans-serif;
+      font-size: 10pt; line-height: 1.4; color: #000;
+      width: 210mm; min-height: 297mm; padding: 15mm; margin: 0 auto;
+    }
+    .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+    .form-title { display: flex; align-items: center; gap: 10px; }
+    .form-title .label { font-size: 10pt; line-height: 1.3; }
+    .form-title .form-number { font-size: 24pt; font-weight: bold; }
+    .continuation-box { border: 2px solid #000; padding: 5px 10px; font-weight: bold; font-size: 11pt; }
+    .date-br-row { display: flex; justify-content: space-between; margin-bottom: 10px; }
+    .date-boxes { display: flex; gap: 5px; align-items: center; }
+    .date-box { width: 50px; height: 24px; border: 1px solid #000; text-align: center; }
+    .br-box { width: 180px; height: 24px; border: 1px solid #000; }
+    .business-reg { text-align: right; }
+    .business-reg .label { font-size: 9pt; margin-bottom: 2px; }
+    .section-title { font-size: 11pt; font-weight: bold; margin-bottom: 10px; text-decoration: underline; }
+    .section-title .zh { margin-right: 5px; }
+    .section-title .en { font-weight: bold; }
+    .field-row { display: flex; align-items: flex-start; margin-bottom: 6px; gap: 5px; }
+    .field-label { min-width: 140px; font-size: 9pt; }
+    .field-label .zh { display: block; }
+    .field-label .en { display: block; font-weight: bold; }
+    .field-input { flex: 1; border: 1px solid #000; padding: 3px 5px; font-size: 9pt; min-height: 24px; }
+    .field-input-wide { width: 100%; }
+    .sub-label { font-size: 8pt; text-align: right; min-width: 80px; }
+    .sub-label .zh { display: block; }
+    .sub-label .en { display: block; }
+    .address-block { margin-left: 145px; margin-bottom: 6px; }
+    .address-row { display: flex; align-items: center; margin-bottom: 4px; }
+    .address-row .sub-label { min-width: 100px; }
+    .address-row .field-input { flex: 1; }
+    .id-section { margin-left: 145px; }
+    .id-row { display: flex; align-items: center; margin-bottom: 6px; }
+    .id-row .label { min-width: 120px; font-size: 9pt; }
+    .id-row .label .zh { display: block; }
+    .id-row .label .en { display: block; font-weight: bold; }
+    .id-input-group { display: flex; align-items: center; flex: 1; }
+    .id-input { flex: 1; border: 1px solid #000; padding: 3px 5px; font-size: 9pt; height: 24px; }
+    .id-mask { display: flex; gap: 2px; margin-left: 5px; }
+    .id-mask span { width: 22px; height: 24px; border: 1px solid #000; background: #ccc; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+    .id-mask .paren { border: none; background: none; width: auto; }
+    .licence-section { margin-top: 10px; }
+    .licence-row { display: flex; align-items: flex-start; gap: 10px; }
+    .licence-input { width: 100px; height: 26px; border: 1px solid #000; }
+    .checkbox { width: 14px; height: 14px; border: 1px solid #000; display: inline-block; vertical-align: middle; }
+    .reason-box { flex: 1; height: 80px; border: 1px solid #000; padding: 5px; font-size: 9pt; }
+    .footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 15px; font-size: 8pt; }
+    .qr-code { width: 45px; height: 45px; border: 1px solid #000; display: flex; align-items: center; justify-content: center; font-size: 6pt; margin-bottom: 3px; }
+    .field-number-circle { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #000; color: #fff; border-radius: 50%; font-size: 8pt; font-weight: bold; margin-right: 5px; vertical-align: middle; }
+    .inline-field { display: flex; align-items: center; gap: 5px; margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="form-title">
+      <div class="label"><div>表格</div><div>Form</div></div>
+      <div class="form-number">NAR1</div>
+    </div>
+    <div class="continuation-box">
+      <span class="zh">續頁 A</span>
+      <span class="en">Continuation Sheet A</span>
+    </div>
+  </div>
+
+  <div class="date-br-row">
+    <div>
+      <div style="font-size: 9pt; font-weight: bold; margin-bottom: 3px;">
+        <span class="zh">本申報表的結算日期</span>
+        <span class="en">Date to which this Return is Made Up</span>
+      </div>
+      <div class="date-boxes">
+        <div class="date-box" data-placeholder="return_date_dd"></div>
+        <span style="font-size: 9pt;"><span class="zh">日</span><span class="en">DD</span></span>
+        <div class="date-box" data-placeholder="return_date_mm"></div>
+        <span style="font-size: 9pt;"><span class="zh">月</span><span class="en">MM</span></span>
+        <div class="date-box" data-placeholder="return_date_yyyy"></div>
+        <span style="font-size: 9pt;"><span class="zh">年</span><span class="en">YYYY</span></span>
+      </div>
+    </div>
+    <div class="business-reg">
+      <div class="label"><div>商業登記號碼</div><div>Business Registration Number</div></div>
+      <div class="br-box" data-placeholder="business_registration_number"></div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <span class="zh">公司秘書詳情（自然人）(第 12A 項)</span>
+    <span class="en">Details of Company Secretary (Natural Person) (Section 12A)</span>
+  </div>
+
+  <div class="field-row">
+    <span class="field-number-circle">15</span>
+    <div class="field-label"><span class="zh">中文姓名</span><span class="en">Name in Chinese</span></div>
+    <div class="field-input field-input-wide" data-placeholder="secretary_name_chinese"></div>
+  </div>
+  <div class="field-row">
+    <div class="field-label"><span class="zh">英文姓名</span><span class="en">Name in English</span></div>
+    <div style="flex: 1;">
+      <div class="inline-field">
+        <span class="sub-label"><span class="zh">姓氏</span><span class="en">Surname</span></span>
+        <div class="field-input" data-placeholder="secretary_surname_english"></div>
+      </div>
+      <div class="inline-field">
+        <span class="sub-label"><span class="zh">名字</span><span class="en">Other Names</span></span>
+        <div class="field-input" data-placeholder="secretary_other_names_english"></div>
+      </div>
+    </div>
+  </div>
+  <div class="field-row">
+    <div class="field-label"><span class="zh">前用姓名</span><span class="en">Previous Names</span></div>
+    <div style="flex: 1;">
+      <div class="inline-field">
+        <span class="sub-label"><span class="zh">中文</span><span class="en">Chinese</span></span>
+        <div class="field-input" data-placeholder="secretary_previous_name_chinese" style="width: 150px;"></div>
+        <span class="sub-label" style="margin-left: 10px;"><span class="zh">英文</span><span class="en">English</span></span>
+        <div class="field-input" data-placeholder="secretary_previous_name_english" style="flex: 1;"></div>
+      </div>
+    </div>
+  </div>
+  <div class="field-row">
+    <div class="field-label"><span class="zh">別名</span><span class="en">Alias</span></div>
+    <div style="flex: 1;">
+      <div class="inline-field">
+        <span class="sub-label"><span class="zh">中文</span><span class="en">Chinese</span></span>
+        <div class="field-input field-input-wide" data-placeholder="secretary_alias_chinese"></div>
+      </div>
+      <div class="inline-field">
+        <span class="sub-label"><span class="zh">英文</span><span class="en">English</span></span>
+        <div class="field-input field-input-wide" data-placeholder="secretary_alias_english"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field-row" style="margin-top: 10px;">
+    <span class="field-number-circle">16</span>
+    <div class="field-label"><span class="zh">香港通訊地址</span><span class="en">Hong Kong Correspondence Address</span></div>
+  </div>
+  <div class="address-block">
+    <div class="address-row">
+      <span class="sub-label"><span class="zh">室／樓／座等</span><span class="en">Flat/Floor/Block etc.</span></span>
+      <div class="field-input" data-placeholder="secretary_address_flat"></div>
+    </div>
+    <div class="address-row">
+      <span class="sub-label"><span class="zh">大廈</span><span class="en">Building</span></span>
+      <div class="field-input" data-placeholder="secretary_address_building"></div>
+    </div>
+    <div class="address-row">
+      <span class="sub-label"><span class="zh">街道／屋苑／地段／村等</span><span class="en">Street/Estate/Lot/Village etc.</span></span>
+      <div class="field-input" data-placeholder="secretary_address_street"></div>
+    </div>
+    <div class="address-row">
+      <span class="sub-label"><span class="zh">區</span><span class="en">District</span></span>
+      <div class="field-input" data-placeholder="secretary_address_district"></div>
+    </div>
+    <div class="address-row">
+      <span class="sub-label"><span class="zh">地區</span><span class="en">Region</span></span>
+      <div class="field-input" style="background: #f5f5f5;">香港 / HONG KONG</div>
+    </div>
+  </div>
+
+  <div class="field-row">
+    <span class="field-number-circle">17</span>
+    <div class="field-label"><span class="zh">電郵地址</span><span class="en">Email Address</span></div>
+    <div class="field-input field-input-wide" data-placeholder="secretary_email"></div>
+  </div>
+
+  <div class="field-row" style="margin-top: 10px;">
+    <span class="field-number-circle">18</span>
+    <div class="field-label"><span class="zh">身分識別</span><span class="en">Identification</span></div>
+  </div>
+  <div class="id-section">
+    <div class="id-row">
+      <div class="label">
+        <span>(a)</span>
+        <span class="zh">香港身分證部分號碼</span>
+        <span class="en">Partial Number of Hong Kong Identity Card</span>
+      </div>
+      <div class="id-input-group">
+        <div class="id-input" data-placeholder="secretary_hkid_partial"></div>
+        <div class="id-mask">
+          <span>*</span><span>*</span><span>*</span>
+          <span class="paren">(</span><span>*</span><span class="paren">)</span>
+        </div>
+      </div>
+    </div>
+    <div class="id-row">
+      <div class="label">
+        <span>(b)</span>
+        <span class="zh">護照</span>
+        <span class="en">Passport</span>
+      </div>
+      <div style="flex: 1;">
+        <div class="inline-field">
+          <span class="sub-label"><span class="zh">簽發國家／地區</span><span class="en">Issuing Country/Region</span></span>
+          <div class="field-input" data-placeholder="secretary_passport_country"></div>
+        </div>
+        <div class="inline-field">
+          <span class="sub-label"><span class="zh">部分號碼</span><span class="en">Partial Number</span></span>
+          <div class="field-input" data-placeholder="secretary_passport_partial"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="licence-section">
+    <div class="field-row">
+      <span class="field-number-circle">20</span>
+      <div>
+        <div style="font-weight: bold;">
+          <span class="zh">信託或公司服務提供者牌照</span>
+          <span class="en">Trust or Company Service Provider Licence</span>
+        </div>
+        <div style="font-size: 8pt; font-style: italic;">
+          <span class="zh">請填報牌照編號或在適用的空格內加上 ✓ 號</span>
+          <span class="en">Please provide the licence no. or tick the relevant box</span>
+        </div>
+      </div>
+    </div>
+    <div class="licence-row">
+      <div>
+        <div style="font-size: 9pt; margin-bottom: 3px;">
+          <span class="zh">牌照編號</span>
+          <span class="en">Licence No.</span>
+        </div>
+        <div class="licence-input" data-placeholder="secretary_licence_no"></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 5px; margin-top: 15px;">
+        <div class="checkbox"></div>
+        <span style="font-size: 9pt;">
+          <span class="zh">無須領有牌照</span>
+          <span class="en">Not required to obtain a licence</span>
+        </span>
+      </div>
+      <div>
+        <div style="font-size: 9pt; margin-bottom: 3px;">
+          <span class="zh">原因</span>
+          <span class="en">Reason:</span>
+        </div>
+        <div class="reason-box" data-placeholder="secretary_licence_reason"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>指明編號 2/2025 (2025 年 5 月) Specification No. 2/2025 (May 2025)</div>
+    <div style="text-align: right;">
+      <div class="qr-code">QR</div>
+    </div>
+  </div>
+</body>
+</html>

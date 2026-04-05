@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NAR1 Form - Notes</title>
+  <style>
+    @page { size: A4; margin: 20mm; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Microsoft YaHei", "SimHei", Arial, sans-serif;
+      font-size: 10pt; line-height: 1.6; color: #000;
+      width: 210mm; min-height: 297mm; padding: 20mm; margin: 0 auto;
+    }
+    .section { margin-bottom: 15px; }
+    .section-title { font-weight: bold; margin-bottom: 8px; }
+    .item { margin-bottom: 8px; }
+    .item-number { font-weight: bold; margin-right: 5px; }
+    .sub-item { margin-left: 20px; margin-bottom: 5px; }
+    .sub-item-label { font-weight: bold; }
+    .highlight { text-decoration: underline; }
+    .example-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+    .example-table th, .example-table td { border: 1px solid #000; padding: 5px; text-align: center; font-size: 9pt; }
+    .example-table th { font-weight: bold; background: #f0f0f0; }
+    .mask-box { display: inline-block; width: 18px; height: 18px; border: 1px solid #000; background: #ccc; text-align: center; line-height: 18px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <div class="section-title">公司秘書（第 12 項）</div>
+    <div class="item">
+      <span class="item-number">15.</span>
+      屬自然人的公司秘書的姓名，必須與其香港身分證上所載的姓名一致。如該人並非香港身分證持有人，則必須與其護照上所載的姓名一致。
+    </div>
+    <div class="item">
+      <span class="item-number">16.</span>
+      請申報屬自然人的公司秘書<span class="highlight">在香港的通訊地址</span>。本處不接納非香港地址及郵政信箱號碼。
+    </div>
+    <div class="item">
+      <span class="item-number">17.</span>
+      請提供公司秘書的電郵地址(如有的話)以方便聯絡。如電郵地址有任何更改，請以表格 ND2B 通知公司註冊處。
+    </div>
+    <div class="item">
+      <span class="item-number">18.</span>
+      <div class="sub-item">
+        <span class="sub-item-label">(a)</span> 請填報香港身分證的<span class="highlight">部分號碼</span>。如該人並非香港身分證持有人，請提供其所持護照的<span class="highlight">部分號碼</span>及簽發國家／地區。請根據以下有關「部分號碼」的描述填報「部分號碼」。
+      </div>
+      <div class="sub-item" style="margin-top: 10px;">
+        「部分號碼」指—
+        <div style="margin-left: 20px;">
+          <div>(i) 如組成分身識別號碼的字母或數目字字元序列的字元數目是雙數(不包括空位、標點符號及標記符號)－該序列的前半部分；或</div>
+          <div>(ii) 如組成分身識別號碼的字母或數目字字元序列的字元數目是單數(不包括空位、標點符號及標記符號)－該序列的首個字元開始，至處於該序列正中間位置的字元為止的部分。</div>
+        </div>
+      </div>
+      <div class="sub-item" style="margin-top: 10px;">例子：</div>
+      <table class="example-table">
+        <thead>
+          <tr>
+            <th colspan="2">香港身分證號碼</th>
+          </tr>
+          <tr>
+            <th>完整號碼<br>(包括括號內的數字或字母)</th>
+            <th>部分號碼<br>(即所有英文字母及首三個數字)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A123456(7)</td>
+            <td>A 1 2 3 <span class="mask-box">*</span><span class="mask-box">*</span><span class="mask-box">*</span> ( <span class="mask-box">*</span> )</td>
+          </tr>
+          <tr>
+            <td>AA123456(7)</td>
+            <td>A A 1 2 3 <span class="mask-box">*</span><span class="mask-box">*</span><span class="mask-box">*</span> ( <span class="mask-box">*</span> )</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="example-table">
+        <thead>
+          <tr>
+            <th colspan="2">護照號碼</th>
+          </tr>
+          <tr>
+            <th>完整號碼<br>(包括標點符號及標記符號)</th>
+            <th>部分號碼</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ABCD1234567</td>
+            <td>ABCD12</td>
+          </tr>
+          <tr>
+            <td>ABCD12345678</td>
+            <td>ABCD12</td>
+          </tr>
+          <tr>
+            <td>ABCD123456789</td>
+            <td>ABCD123</td>
+          </tr>
+          <tr>
+            <td>ABC-123-4</td>
+            <td>ABC1</td>
+          </tr>
+          <tr>
+            <td>#A1234567H(*)</td>
+            <td>A1234</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="sub-item">
+        <span class="sub-item-label">(b)</span> 如公司秘書屬自然人，並曾根據以上描述，在公司註冊處登記其香港身分證或護照的<span class="highlight">部分號碼</span>，請填報該<span class="highlight">部分號碼</span>。
+      </div>
+      <div class="sub-item">
+        <span class="sub-item-label">(c)</span> <span class="highlight">請勿</span>在有關空格內填報完整的身分識別號碼，格內所填報的資料會供公眾查閱。
+      </div>
+      <div class="sub-item">
+        <span class="sub-item-label">(d)</span> 如該項資料未曾在本處登記，請在有關的空格內填上「無」。
+      </div>
+    </div>
+    <div class="item">
+      <span class="item-number">19.</span>
+      請填報由稅務局轄下的商業登記署所發出的商業登記號碼（即商業登記證號碼的首 8 位數字），「-」後的數字無須填寫。公司註冊處在 2023 年 12 月 27 日或之後向成立／註冊的公司所發出的「公司註冊證明書」或「非香港公司註冊證明書」，以及公司註冊處向經遷冊公司所發出的「遷冊證明書」，亦已採用商業登記號碼作為證明書上的編號。
+    </div>
+  </div>
+</body>
+</html>

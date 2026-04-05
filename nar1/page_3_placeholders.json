@@ -1,0 +1,20 @@
+{
+  "business_registration_number": "12345678",
+  "secretary_name_chinese": "陳大文",
+  "secretary_surname_english": "CHAN",
+  "secretary_other_names_english": "TAI MAN",
+  "secretary_previous_name_chinese": "陳小明",
+  "secretary_previous_name_english": "CHAN SIU MING",
+  "secretary_alias_chinese": "阿文",
+  "secretary_alias_english": "MAN",
+  "secretary_address_flat": "12A",
+  "secretary_address_building": "ABC Tower",
+  "secretary_address_street": "123 Queen's Road Central",
+  "secretary_address_district": "Central",
+  "secretary_email": "secretary@company.com",
+  "secretary_hkid_partial": "A123456",
+  "secretary_passport_country": "HKG",
+  "secretary_passport_partial": "H12345678",
+  "secretary_licence_no": "TC001234",
+  "secretary_licence_reason": "Exempt under section XYZ"
+}

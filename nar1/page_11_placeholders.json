@@ -1,0 +1,23 @@
+{
+  "business_registration_number": "12345678",
+  "return_date_dd": "31",
+  "return_date_mm": "12",
+  "return_date_yyyy": "2024",
+  "secretary_name_chinese": "林美玲",
+  "secretary_surname_english": "LAM",
+  "secretary_other_names_english": "MEI LING",
+  "secretary_previous_name_chinese": "林美美",
+  "secretary_previous_name_english": "LAM MEI MEI",
+  "secretary_alias_chinese": "阿玲",
+  "secretary_alias_english": "LING",
+  "secretary_address_flat": "18/F",
+  "secretary_address_building": "Grand Tower",
+  "secretary_address_street": "88 Gloucester Road",
+  "secretary_address_district": "Wanchai",
+  "secretary_email": "lam.meiling@company.com",
+  "secretary_hkid_partial": "D112233",
+  "secretary_passport_country": "HKG",
+  "secretary_passport_partial": "H11223344",
+  "secretary_licence_no": "TC009999",
+  "secretary_licence_reason": "Licensed TCSP"
+}

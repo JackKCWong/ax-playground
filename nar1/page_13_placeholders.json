@@ -1,0 +1,23 @@
+{
+  "business_registration_number": "12345678",
+  "return_date_dd": "31",
+  "return_date_mm": "12",
+  "return_date_yyyy": "2024",
+  "director_alternate_to": "LEE SI",
+  "director_name_chinese": "黃大強",
+  "director_surname_english": "WONG",
+  "director_other_names_english": "DAI KEUNG",
+  "director_previous_name_chinese": "黃大強",
+  "director_previous_name_english": "WONG DAI KEUNG",
+  "director_alias_chinese": "強哥",
+  "director_alias_english": "KEUNG",
+  "director_address_flat": "3/F",
+  "director_address_building": "Sunshine Tower",
+  "director_address_street": "555 Shanghai Street",
+  "director_address_district": "Yau Ma Tei, Kowloon",
+  "director_address_country": "Hong Kong",
+  "director_email": "wong.dk@company.com",
+  "director_hkid_partial": "E445566",
+  "director_passport_country": "HKG",
+  "director_passport_partial": "H44556677"
+}

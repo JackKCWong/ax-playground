@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NAR1 Form - Schedule 2</title>
+  <style>
+    @page { size: A4; margin: 15mm; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Microsoft YaHei", "SimHei", Arial, sans-serif;
+      font-size: 10pt; line-height: 1.4; color: #000;
+      width: 210mm; min-height: 297mm; padding: 15mm; margin: 0 auto;
+    }
+    .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+    .form-title { display: flex; align-items: center; gap: 10px; }
+    .form-title .label { font-size: 10pt; line-height: 1.3; }
+    .form-title .form-number { font-size: 24pt; font-weight: bold; }
+    .schedule-title { text-align: center; font-size: 12pt; font-weight: bold; margin-bottom: 5px; }
+    .schedule-subtitle { text-align: center; font-size: 11pt; font-weight: bold; margin-bottom: 10px; }
+    .date-br-row { display: flex; justify-content: space-between; margin-bottom: 10px; }
+    .date-boxes { display: flex; gap: 5px; align-items: center; }
+    .date-box { width: 50px; height: 24px; border: 1px solid #000; text-align: center; }
+    .br-box { width: 180px; height: 24px; border: 1px solid #000; }
+    .business-reg { text-align: right; }
+    .business-reg .label { font-size: 9pt; margin-bottom: 2px; }
+    .section { margin-bottom: 10px; }
+    .section-title { margin-bottom: 3px; font-size: 11pt; }
+    .section-title .number { font-weight: bold; }
+    .section-title .zh { margin-right: 5px; }
+    .section-title .en { font-weight: bold; }
+    .section-subtitle { font-size: 8pt; margin-bottom: 8px; line-height: 1.4; }
+    .section-subtitle .zh { margin-right: 5px; }
+    .section-subtitle .en { font-style: italic; }
+    .field-row { display: flex; align-items: flex-start; margin-bottom: 5px; gap: 5px; }
+    .field-label { min-width: 120px; font-size: 9pt; }
+    .field-label .zh { display: block; }
+    .field-label .en { display: block; font-weight: bold; }
+    .field-input { flex: 1; border: 1px solid #000; padding: 3px 5px; font-size: 9pt; min-height: 22px; }
+    .field-input-wide { width: 100%; }
+    .sub-label { font-size: 8pt; text-align: right; min-width: 60px; }
+    .sub-label .zh { display: block; }
+    .sub-label .en { display: block; }
+    .address-block { margin-left: 125px; margin-bottom: 5px; }
+    .address-row { display: flex; align-items: center; margin-bottom: 3px; }
+    .address-row .sub-label { min-width: 120px; }
+    .address-row .field-input { flex: 1; }
+    .member-block { margin-bottom: 15px; border-bottom: 1px dashed #ccc; padding-bottom: 10px; }
+    .member-block:last-child { border-bottom: none; }
+    .shares-row { display: flex; gap: 10px; margin-bottom: 8px; }
+    .shares-box { flex: 1; }
+    .shares-box .label { font-size: 9pt; font-weight: bold; margin-bottom: 2px; }
+    .shares-box .label .zh { margin-right: 3px; }
+    .shares-input { width: 100%; height: 28px; border: 1px solid #000; padding: 3px 5px; font-size: 9pt; }
+    .checkbox-item { display: flex; align-items: flex-start; gap: 5px; margin: 5px 0; }
+    .checkbox { width: 14px; height: 14px; border: 1px solid #000; flex-shrink: 0; margin-top: 2px; }
+    .checkbox-label { font-size: 8pt; }
+    .checkbox-label .zh { display: block; }
+    .checkbox-label .en { display: block; font-style: italic; }
+    .remarks-box { height: 40px; border: 1px solid #000; padding: 3px 5px; font-size: 9pt; margin-top: 3px; }
+    .footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 10px; font-size: 8pt; }
+    .qr-code { width: 40px; height: 40px; border: 1px solid #000; display: flex; align-items: center; justify-content: center; font-size: 6pt; margin-bottom: 3px; }
+    .field-number-circle { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #000; color: #fff; border-radius: 50%; font-size: 8pt; font-weight: bold; margin-right: 5px; vertical-align: middle; }
+    .note { font-size: 8pt; margin-top: 3px; }
+    .note .zh { margin-right: 5px; }
+    .note .en { font-style: italic; }
+    .inline-field { display: flex; align-items: center; gap: 5px; margin-bottom: 3px; }
+    .highlight { font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="form-title">
+      <div class="label"><div>表格</div><div>Form</div></div>
+      <div class="form-number">NAR1</div>
+    </div>
+    <div style="text-align: right;">
+      <div class="schedule-title">
+        <span class="zh">附表二</span>
+        <span class="en">Schedule 2</span>
+      </div>
+      <div class="schedule-subtitle">
+        <span class="zh">(上市公司適用</span>
+        <span class="en">FOR LISTED COMPANY)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="date-br-row">
+    <div>
+      <div style="font-size: 9pt; font-weight: bold; margin-bottom: 3px;">
+        <span class="zh">本申報表的結算日期</span>
+        <span class="en">Date to which this Return is Made Up</span>
+      </div>
+      <div class="date-boxes">
+        <div class="date-box" data-placeholder="return_date_dd"></div>
+        <span style="font-size: 9pt;">
+          <span class="zh">日</span>
+          <span class="en">DD</span>
+        </span>
+        <div class="date-box" data-placeholder="return_date_mm"></div>
+        <span style="font-size: 9pt;">
+          <span class="zh">月</span>
+          <span class="en">MM</span>
+        </span>
+        <div class="date-box" data-placeholder="return_date_yyyy"></div>
+        <span style="font-size: 9pt;">
+          <span class="zh">年</span>
+          <span class="en">YYYY</span>
+        </span>
+      </div>
+    </div>
+    <div class="business-reg">
+      <div class="label"><div>商業登記號碼</div><div>Business Registration Number</div></div>
+      <div class="br-box" data-placeholder="business_registration_number"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">
+      <span class="field-number-circle">30</span>
+      <span class="field-number-circle">34</span>
+      <span class="zh">上市公司的成員詳情 (第 14 項)</span>
+      <span class="en">Particulars of Member(s) of a Listed Company (Section 14)</span>
+    </div>
+    <div class="section-subtitle">
+      <span class="zh">(有股本的上市公司可填報此頁。如超過兩名成員需要申報，或超過一類股份，可另加附表二。另外，公司可選擇以唯讀光碟或唯讀型數碼多功能光碟提供成員詳情。</span>
+      <span class="en">Listed company having a share capital can complete this page. If there are more than 2 members that are required to be reported, or if there is more than one class of shares, please use additional Schedule 2. Alternatively, the company can choose to provide particulars of members in the form of CD-ROM or DVD-ROM.)</span>
+    </div>
+    <div style="font-size: 9pt; font-weight: bold; margin-bottom: 8px; text-decoration: underline;">
+      <span class="zh">截至本申報表的日期持有公司任何類別股份中的不少於</span>
+      <span class="highlight">5%</span>
+      <span class="zh">發行股本的成員的詳情</span>
+      <span class="en">Particulars of Member(s) who Held not less than 5% of the Issued Shares in any Class of the Company's Shares as at the Date of this Return</span>
+    </div>
+
+    <div class="shares-row">
+      <div class="shares-box">
+        <div class="label">
+          <span class="zh">股份類別</span>
+          <span class="en">Class of Shares</span>
+        </div>
+        <div class="shares-input" data-placeholder="share_class"></div>
+      </div>
+      <div class="shares-box">
+        <div class="label">
+          <span class="zh">此類別股份的已發行總數</span>
+          <span class="en">Total Number of Issued Shares in this Class</span>
+        </div>
+        <div class="shares-input" data-placeholder="total_issued_shares"></div>
+      </div>
+    </div>
+
+    <!-- Member 1 -->
+    <div class="member-block">
+      <div style="font-weight: bold; margin-bottom: 5px;">1</div>
+      <div class="field-row">
+        <div class="field-label">
+          <span class="zh">中文姓名／名稱</span>
+          <span class="en">Name in Chinese</span>
+        </div>
+        <div class="field-input field-input-wide" data-placeholder="member1_name_chinese"></div>
+        <div style="width: 130px; text-align: center;">
+          <div style="font-size: 8pt; font-weight: bold;">
+            <span class="zh">持有股份數目</span>
+            <span class="en">No. of Shares Held</span>
+          </div>
+          <div class="field-input" data-placeholder="member1_shares_held" style="height: 30px;"></div>
+          <div style="font-size: 7pt; margin-top: 3px;">
+            <span class="zh">佔此類別已發行股份的百分比</span>
+            <span class="en">Percentage of Issued Shares Held in this Class</span>
+          </div>
+          <div class="field-input" data-placeholder="member1_percentage" style="height: 30px;"></div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">
+          <span class="zh">英文姓名</span>
+          <span class="en">Name in English</span>
+        </div>
+        <div style="flex: 1;">
+          <div class="inline-field">
+            <span class="sub-label"><span class="zh">姓氏</span><span class="en">Surname</span></span>
+            <div class="field-input" data-placeholder="member1_surname"></div>
+          </div>
+          <div class="inline-field">
+            <span class="sub-label"><span class="zh">名字</span><span class="en">Other Names</span></span>
+            <div class="field-input" data-placeholder="member1_other_names"></div>
+          </div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">
+          <span class="zh">或 OR<br>英文名稱</span>
+          <span class="en">Name in English</span>
+        </div>
+        <div class="field-input field-input-wide" data-placeholder="member1_name_english_alt"></div>
+        <div style="width: 130px;">
+          <div class="checkbox-item" style="margin-top: 10px;">
+            <div class="checkbox"></div>
+            <div class="checkbox-label">
+              <span class="zh">股份是聯名持有</span>
+              <span class="en">Shares are Jointly Held</span>
+            </div>
+          </div>
+          <div class="note">
+            <span class="zh">(如適用，請加 ✓ 號</span>
+            <span class="en">Please tick if applicable.)</span>
+          </div>
+        </div>
+      </div>
+      <div class="field-row" style="margin-top: 8px;">
+        <div class="field-label">
+          <span class="zh">地址</span>
+          <span class="en">Address</span>
+        </div>
+      </div>
+      <div class="address-block">
+        <div class="address-row">
+          <span class="sub-label"><span class="zh">室／樓／座等</span><span class="en">Flat/Floor/Block etc.</span></span>
+          <div class="field-input" data-placeholder="member1_address_flat"></div>
+        </div>
+        <div class="address-row">
+          <span class="sub-label"><span class="zh">大廈</span><span class="en">Building</span></span>
+          <div class="field-input" data-placeholder="member1_address_building"></div>
+        </div>
+        <div class="address-row">
+          <span class="sub-label"><span class="zh">街道／屋苑／地段／村等</span><span class="en">Street/Estate/Lot/Village etc.</span></span>
+          <div class="field-input" data-placeholder="member1_address_street"></div>
+        </div>
+        <div class="address-row">
+          <span class="sub-label"><span class="zh">區／市／省／州／郵遞區號等</span><span class="en">District/City/Province/State/Postal Code etc.</span></span>
+          <div class="field-input" data-placeholder="member1_address_district"></div>
+        </div>
+        <div class="address-row">
+          <span class="sub-label"><span class="zh">國家／地區</span><span class="en">Country/Region</span></span>
+          <div class="field-input" data-placeholder="member1_address_country"></div>
+        </div>
+      </div>
+      <div class="field-row">
+        <span class="field-number-circle">34</span>
+        <div class="field-label">
+          <span class="zh">備註*</span>
+          <span class="en">Remarks*</span>
+        </div>
+        <div class="remarks-box" data-placeholder="member1_remarks"></div>
+      </div>
+      <div class="note">
+        <span class="zh">*例如聯名持有股份的詳情。</span>
+        <span class="en">For example, details of jointly held shares.</span>
+      </div>
+    </div>
+
+    <!-- Member 2 -->
+    <div class="member-block">
+      <div style="font-weight: bold; margin-bottom: 5px;">2</div>
+      <div class="field-row">
+        <div class="field-label">
+          <span class="zh">中文姓名／名稱</span>
+          <span class="en">Name in Chinese</span>
+        </div>
+        <div class="field-input field-input-wide" data-placeholder="member2_name_chinese"></div>
+        <div style="width: 130px; text-align: center;">
+          <div style="font-size: 8pt; font-weight: bold;">
+            <span class="zh">持有股份數目</span>
+            <span class="en">No. of Shares Held</span>
+          </div>
+          <div class="field-input" data-placeholder="member2_shares_held" style="height: 30px;"></div>
+          <div style="font-size: 7pt; margin-top: 3px;">
+            <span class="zh">佔此類別已發行股份的百分比</span>
+            <span class="en">Percentage of Issued Shares Held in this Class</span>
+          </div>
+          <div class="field-input" data-placeholder="member2_percentage" style="height: 30px;"></div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">
+          <span class="zh">英文姓名</span>
+          <span class="en">Name in English</span>
+        </div>
+        <div style="flex: 1;">
+          <div class="inline-field">
+            <span class="sub-label"><span class="zh">姓氏</span><span class="en">Surname</span></span>
+            <div class="field-input" data-placeholder="member2_surname"></div>
+          </div>
+          <div class="inline-field">
+            <span class="sub-label"><span class="zh">名字</span><span class="en">Other Names</span></span>
+            <div class="field-input" data-placeholder="member2_other_names"></div>
+          </div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">
+          <span class="zh">或 OR<br>英文名稱</span>
+          <span class="en">Name in English</span>
+        </div>
+        <div class="field-input field-input-wide" data-placeholder="member2_name_english_alt"></div>
+        <div style="width: 130px;">
+          <div class="checkbox-item" style="margin-top: 10px;">
+            <div class="checkbox"></div>
+            <div class="checkbox-label">
+              <span class="zh">股份是聯名持有</span>
+              <span class="en">Shares are Jointly Held</span>
+            </div>
+          </div>
+          <div class="note">
+            <span class="zh">(如適用，請加 ✓ 號</span>
+            <span class="en">Please tick if applicable.)</span>
+          </div>
+        </div>
+      </div>
+      <div class="field-row" style="margin-top: 8px;">
+        <div class="field-label">
+          <span class="zh">地址</span>
+          <span class="en">Address</span>
+        </div>
+      </div>
+      <div class="address-block">
+        <div class="address-row">
+          <span class="sub-label"><span class="zh">室／樓／座等</span><span class="en">Flat/Floor/Block etc.</span></span>
+          <div class="field-input" data-placeholder="member2_address_flat"></div>
+        </div>
+        <div class="address-row">
+          <span class="sub-label"><span class="zh">大廈</span><span class="en">Building</span></span>
+          <div class="field-input" data-placeholder="member2_address_building"></div>
+        </div>
+        <div class="address-row">
+          <span class="sub-label"><span class="zh">街道／屋苑／地段／村等</span><span class="en">Street/Estate/Lot/Village etc.</span></span>
+          <div class="field-input" data-placeholder="member2_address_street"></div>
+        </div>
+        <div class="address-row">
+          <span class="sub-label"><span class="zh">區／市／省／州／郵遞區號等</span><span class="en">District/City/Province/State/Postal Code etc.</span></span>
+          <div class="field-input" data-placeholder="member2_address_district"></div>
+        </div>
+        <div class="address-row">
+          <span class="sub-label"><span class="zh">國家／地區</span><span class="en">Country/Region</span></span>
+          <div class="field-input" data-placeholder="member2_address_country"></div>
+        </div>
+      </div>
+      <div class="field-row">
+        <span class="field-number-circle">34</span>
+        <div class="field-label">
+          <span class="zh">備註*</span>
+          <span class="en">Remarks*</span>
+        </div>
+        <div class="remarks-box" data-placeholder="member2_remarks"></div>
+      </div>
+      <div class="note">
+        <span class="zh">*例如聯名持有股份的詳情。</span>
+        <span class="en">For example, details of jointly held shares.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>指明編號 2/2025 (2025 年 5 月) Specification No. 2/2025 (May 2025)</div>
+    <div style="text-align: right;">
+      <div class="qr-code">QR</div>
+      <div>
+        <span class="zh">附表二第</span>
+        <span class="en">Schedule 2 Page</span>
+        <span data-placeholder="schedule_page"></span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

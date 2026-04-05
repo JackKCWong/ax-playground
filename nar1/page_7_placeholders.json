@@ -1,0 +1,19 @@
+{
+  "business_registration_number": "12345678",
+  "reserve_director_name_chinese": "張三",
+  "reserve_director_surname_english": "CHEUNG",
+  "reserve_director_other_names_english": "SAM",
+  "reserve_director_previous_name_chinese": "張小三",
+  "reserve_director_previous_name_english": "CHEUNG SIU SAM",
+  "reserve_director_alias_chinese": "阿三",
+  "reserve_director_alias_english": "SAM",
+  "reserve_director_address_flat": "5/F",
+  "reserve_director_address_building": "Lucky Tower",
+  "reserve_director_address_street": "321 Lockhart Road",
+  "reserve_director_address_district": "Causeway Bay, Hong Kong",
+  "reserve_director_address_country": "Hong Kong",
+  "reserve_director_email": "reserve@company.com",
+  "reserve_director_hkid_partial": "C789012",
+  "reserve_director_passport_country": "HKG",
+  "reserve_director_passport_partial": "H98765432"
+}

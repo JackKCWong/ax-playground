@@ -1,0 +1,23 @@
+{
+  "business_registration_number": "12345678",
+  "director1_alternate_to": "",
+  "director1_name_chinese": "控股投資有限公司",
+  "director1_name_english": "Holdings Investment Limited",
+  "director1_address_flat": "20/F",
+  "director1_address_building": "Central Plaza",
+  "director1_address_street": "18 Harbour Road",
+  "director1_address_district": "Wanchai, Hong Kong",
+  "director1_address_country": "Hong Kong",
+  "director1_email": "info@holdingsinv.com",
+  "director1_br_number": "11223344",
+  "director2_alternate_to": "",
+  "director2_name_chinese": "管理顧問有限公司",
+  "director2_name_english": "Management Advisory Limited",
+  "director2_address_flat": "15/F",
+  "director2_address_building": "Tower 2",
+  "director2_address_street": "88 Queensway",
+  "director2_address_district": "Admiralty, Hong Kong",
+  "director2_address_country": "Hong Kong",
+  "director2_email": "contact@mgmtadv.com",
+  "director2_br_number": "55667788"
+}

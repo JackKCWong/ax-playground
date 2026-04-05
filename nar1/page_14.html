@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NAR1 Form - Continuation Sheet D</title>
+  <style>
+    @page { size: A4; margin: 15mm; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Microsoft YaHei", "SimHei", Arial, sans-serif;
+      font-size: 10pt; line-height: 1.4; color: #000;
+      width: 210mm; min-height: 297mm; padding: 15mm; margin: 0 auto;
+    }
+    .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+    .form-title { display: flex; align-items: center; gap: 10px; }
+    .form-title .label { font-size: 10pt; line-height: 1.3; }
+    .form-title .form-number { font-size: 24pt; font-weight: bold; }
+    .continuation-box { border: 2px solid #000; padding: 5px 10px; font-weight: bold; font-size: 11pt; }
+    .date-br-row { display: flex; justify-content: space-between; margin-bottom: 10px; }
+    .date-boxes { display: flex; gap: 5px; align-items: center; }
+    .date-box { width: 50px; height: 24px; border: 1px solid #000; text-align: center; }
+    .br-box { width: 180px; height: 24px; border: 1px solid #000; }
+    .business-reg { text-align: right; }
+    .business-reg .label { font-size: 9pt; margin-bottom: 2px; }
+    .section-title { font-size: 11pt; font-weight: bold; margin-bottom: 5px; text-decoration: underline; }
+    .section-title .zh { margin-right: 5px; }
+    .section-title .en { font-weight: bold; }
+    .field-row { display: flex; align-items: flex-start; margin-bottom: 6px; gap: 5px; }
+    .field-label { min-width: 140px; font-size: 9pt; }
+    .field-label .zh { display: block; }
+    .field-label .en { display: block; font-weight: bold; }
+    .field-input { flex: 1; border: 1px solid #000; padding: 3px 5px; font-size: 9pt; min-height: 24px; }
+    .field-input-wide { width: 100%; }
+    .address-block { margin-left: 145px; margin-bottom: 6px; }
+    .address-row { display: flex; align-items: center; margin-bottom: 4px; }
+    .address-row .sub-label { min-width: 130px; font-size: 8pt; text-align: right; }
+    .address-row .sub-label .zh { display: block; }
+    .address-row .sub-label .en { display: block; }
+    .address-row .field-input { flex: 1; }
+    .footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 15px; font-size: 8pt; }
+    .qr-code { width: 45px; height: 45px; border: 1px solid #000; display: flex; align-items: center; justify-content: center; font-size: 6pt; margin-bottom: 3px; }
+    .field-number-circle { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #000; color: #fff; border-radius: 50%; font-size: 8pt; font-weight: bold; margin-right: 5px; vertical-align: middle; }
+    .capacity-row { display: flex; align-items: center; gap: 15px; margin-bottom: 8px; margin-left: 145px; }
+    .checkbox-group { display: flex; align-items: center; gap: 5px; }
+    .checkbox { width: 14px; height: 14px; border: 1px solid #000; display: inline-block; }
+    .alternate-to { display: flex; align-items: center; gap: 5px; }
+    .alternate-to .field-input { width: 150px; }
+    .note { font-size: 8pt; margin-bottom: 8px; }
+    .note .zh { margin-right: 5px; }
+    .note .en { font-style: italic; }
+    .director-block { margin-bottom: 15px; border-bottom: 1px dashed #ccc; padding-bottom: 10px; }
+    .director-block:last-child { border-bottom: none; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="form-title">
+      <div class="label"><div>表格</div><div>Form</div></div>
+      <div class="form-number">NAR1</div>
+    </div>
+    <div class="continuation-box">
+      <span class="zh">續頁 D</span>
+      <span class="en">Continuation Sheet D</span>
+    </div>
+  </div>
+
+  <div class="date-br-row">
+    <div>
+      <div style="font-size: 9pt; font-weight: bold; margin-bottom: 3px;">
+        <span class="zh">本申報表的結算日期</span>
+        <span class="en">Date to which this Return is Made Up</span>
+      </div>
+      <div class="date-boxes">
+        <div class="date-box" data-placeholder="return_date_dd"></div>
+        <span style="font-size: 9pt;"><span class="zh">日</span><span class="en">DD</span></span>
+        <div class="date-box" data-placeholder="return_date_mm"></div>
+        <span style="font-size: 9pt;"><span class="zh">月</span><span class="en">MM</span></span>
+        <div class="date-box" data-placeholder="return_date_yyyy"></div>
+        <span style="font-size: 9pt;"><span class="zh">年</span><span class="en">YYYY</span></span>
+      </div>
+    </div>
+    <div class="business-reg">
+      <div class="label"><div>商業登記號碼</div><div>Business Registration Number</div></div>
+      <div class="br-box" data-placeholder="business_registration_number"></div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <span class="zh">董事詳情（法人團體）(第 13B 項)</span>
+    <span class="en">Details of Director (Body Corporate) (Section 13B)</span>
+  </div>
+  <div class="note">
+    <span class="zh">請在適用的空格內加上 ✓ 號</span>
+    <span class="en">Please tick the relevant box(es)</span>
+  </div>
+
+  <!-- Director 1 -->
+  <div class="director-block">
+    <div class="field-row">
+      <span class="field-number-circle">23</span>
+      <div class="field-label"><span class="zh">1 身分</span><span class="en">1 Capacity</span></div>
+      <div class="capacity-row" style="margin-left: 0;">
+        <div class="checkbox-group">
+          <div class="checkbox"></div>
+          <span style="font-size: 9pt;"><span class="zh">董事</span><span class="en">Director</span></span>
+        </div>
+        <div class="checkbox-group">
+          <div class="checkbox"></div>
+          <span style="font-size: 9pt;"><span class="zh">候補董事</span><span class="en">Alternate Director</span></span>
+        </div>
+        <div class="alternate-to">
+          <span style="font-size: 9pt;"><span class="zh">代替</span><span class="en">Alternate to</span></span>
+          <div class="field-input" data-placeholder="director1_alternate_to"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label"><span class="zh">中文名稱</span><span class="en">Name in Chinese</span></div>
+      <div class="field-input field-input-wide" data-placeholder="director1_name_chinese"></div>
+    </div>
+    <div class="field-row">
+      <div class="field-label"><span class="zh">英文名稱</span><span class="en">Name in English</span></div>
+      <div class="field-input field-input-wide" data-placeholder="director1_name_english"></div>
+    </div>
+
+    <div class="field-row" style="margin-top: 8px;">
+      <span class="field-number-circle">28</span>
+      <div class="field-label"><span class="zh">地址</span><span class="en">Address</span></div>
+    </div>
+    <div class="address-block">
+      <div class="address-row">
+        <span class="sub-label"><span class="zh">室／樓／座等</span><span class="en">Flat/Floor/Block etc.</span></span>
+        <div class="field-input" data-placeholder="director1_address_flat"></div>
+      </div>
+      <div class="address-row">
+        <span class="sub-label"><span class="zh">大廈</span><span class="en">Building</span></span>
+        <div class="field-input" data-placeholder="director1_address_building"></div>
+      </div>
+      <div class="address-row">
+        <span class="sub-label"><span class="zh">街道／屋苑／地段／村等</span><span class="en">Street/Estate/Lot/Village etc.</span></span>
+        <div class="field-input" data-placeholder="director1_address_street"></div>
+      </div>
+      <div class="address-row">
+        <span class="sub-label"><span class="zh">區／市／省／州／郵遞區號等</span><span class="en">District/City/Province/State/Postal Code etc.</span></span>
+        <div class="field-input" data-placeholder="director1_address_district"></div>
+      </div>
+      <div class="address-row">
+        <span class="sub-label"><span class="zh">國家／地區</span><span class="en">Country/Region</span></span>
+        <div class="field-input" data-placeholder="director1_address_country"></div>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <span class="field-number-circle">26</span>
+      <div class="field-label"><span class="zh">電郵地址</span><span class="en">Email Address</span></div>
+      <div class="field-input field-input-wide" data-placeholder="director1_email"></div>
+    </div>
+
+    <div class="field-row">
+      <span class="field-number-circle">29</span>
+      <div class="field-label"><span class="zh">商業登記號碼</span><span class="en">Business Registration Number</span></div>
+      <div class="field-input" style="width: 200px;" data-placeholder="director1_br_number"></div>
+    </div>
+    <div class="note">
+      <span class="zh">(只適用於在香港註冊的法人團體</span>
+      <span class="en">Only applicable to body corporate registered in Hong Kong)</span>
+    </div>
+  </div>
+
+  <!-- Director 2 -->
+  <div class="director-block">
+    <div style="font-size: 8pt; margin-bottom: 5px;">
+      <span class="zh">請在適用的空格內加上 ✓ 號</span>
+      <span class="en">Please tick the relevant box(es)</span>
+    </div>
+    <div class="field-row">
+      <span class="field-number-circle">23</span>
+      <div class="field-label"><span class="zh">2 身分</span><span class="en">2 Capacity</span></div>
+      <div class="capacity-row" style="margin-left: 0;">
+        <div class="checkbox-group">
+          <div class="checkbox"></div>
+          <span style="font-size: 9pt;"><span class="zh">董事</span><span class="en">Director</span></span>
+        </div>
+        <div class="checkbox-group">
+          <div class="checkbox"></div>
+          <span style="font-size: 9pt;"><span class="zh">候補董事</span><span class="en">Alternate Director</span></span>
+        </div>
+        <div class="alternate-to">
+          <span style="font-size: 9pt;"><span class="zh">代替</span><span class="en">Alternate to</span></span>
+          <div class="field-input" data-placeholder="director2_alternate_to"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label"><span class="zh">中文名稱</span><span class="en">Name in Chinese</span></div>
+      <div class="field-input field-input-wide" data-placeholder="director2_name_chinese"></div>
+    </div>
+    <div class="field-row">
+      <div class="field-label"><span class="zh">英文名稱</span><span class="en">Name in English</span></div>
+      <div class="field-input field-input-wide" data-placeholder="director2_name_english"></div>
+    </div>
+
+    <div class="field-row" style="margin-top: 8px;">
+      <span class="field-number-circle">28</span>
+      <div class="field-label"><span class="zh">地址</span><span class="en">Address</span></div>
+    </div>
+    <div class="address-block">
+      <div class="address-row">
+        <span class="sub-label"><span class="zh">室／樓／座等</span><span class="en">Flat/Floor/Block etc.</span></span>
+        <div class="field-input" data-placeholder="director2_address_flat"></div>
+      </div>
+      <div class="address-row">
+        <span class="sub-label"><span class="zh">大廈</span><span class="en">Building</span></span>
+        <div class="field-input" data-placeholder="director2_address_building"></div>
+      </div>
+      <div class="address-row">
+        <span class="sub-label"><span class="zh">街道／屋苑／地段／村等</span><span class="en">Street/Estate/Lot/Village etc.</span></span>
+        <div class="field-input" data-placeholder="director2_address_street"></div>
+      </div>
+      <div class="address-row">
+        <span class="sub-label"><span class="zh">區／市／省／州／郵遞區號等</span><span class="en">District/City/Province/State/Postal Code etc.</span></span>
+        <div class="field-input" data-placeholder="director2_address_district"></div>
+      </div>
+      <div class="address-row">
+        <span class="sub-label"><span class="zh">國家／地區</span><span class="en">Country/Region</span></span>
+        <div class="field-input" data-placeholder="director2_address_country"></div>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <span class="field-number-circle">26</span>
+      <div class="field-label"><span class="zh">電郵地址</span><span class="en">Email Address</span></div>
+      <div class="field-input field-input-wide" data-placeholder="director2_email"></div>
+    </div>
+
+    <div class="field-row">
+      <span class="field-number-circle">29</span>
+      <div class="field-label"><span class="zh">商業登記號碼</span><span class="en">Business Registration Number</span></div>
+      <div class="field-input" style="width: 200px;" data-placeholder="director2_br_number"></div>
+    </div>
+    <div class="note">
+      <span class="zh">(只適用於在香港註冊的法人團體</span>
+      <span class="en">Only applicable to body corporate registered in Hong Kong)</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>指明編號 2/2025 (2025 年 5 月) Specification No. 2/2025 (May 2025)</div>
+    <div style="text-align: right;">
+      <div class="qr-code">QR</div>
+    </div>
+  </div>
+</body>
+</html>

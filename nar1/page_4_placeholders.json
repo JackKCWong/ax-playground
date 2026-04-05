@@ -1,0 +1,13 @@
+{
+  "business_registration_number": "12345678",
+  "corp_secretary_name_chinese": "秘書有限公司",
+  "corp_secretary_name_english": "Secretary Limited",
+  "corp_secretary_address_flat": "10/F",
+  "corp_secretary_address_building": "XYZ Centre",
+  "corp_secretary_address_street": "456 Nathan Road",
+  "corp_secretary_address_district": "Mong Kok",
+  "corp_secretary_email": "info@secretaryltd.com",
+  "corp_secretary_br_number": "87654321",
+  "corp_secretary_licence_no": "TC005678",
+  "corp_secretary_licence_reason": "Licensed under TCSP regime"
+}

@@ -1,0 +1,20 @@
+{
+  "business_registration_number": "12345678",
+  "director_alternate_to": "",
+  "director_name_chinese": "李四",
+  "director_surname_english": "LEE",
+  "director_other_names_english": "SI",
+  "director_previous_name_chinese": "李小四",
+  "director_previous_name_english": "LEE SIU SI",
+  "director_alias_chinese": "阿四",
+  "director_alias_english": "SI",
+  "director_address_flat": "8/F",
+  "director_address_building": "Happy Building",
+  "director_address_street": "789 Des Voeux Road",
+  "director_address_district": "Sheung Wan, Hong Kong",
+  "director_address_country": "Hong Kong",
+  "director_email": "director@company.com",
+  "director_hkid_partial": "B654321",
+  "director_passport_country": "CHN",
+  "director_passport_partial": "E12345678"
+}

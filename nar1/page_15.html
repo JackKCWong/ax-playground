@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NAR1 Form - Continuation Sheet E</title>
+  <style>
+    @page { size: A4; margin: 15mm; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Microsoft YaHei", "SimHei", Arial, sans-serif;
+      font-size: 10pt; line-height: 1.4; color: #000;
+      width: 210mm; min-height: 297mm; padding: 15mm; margin: 0 auto;
+    }
+    .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+    .form-title { display: flex; align-items: center; gap: 10px; }
+    .form-title .label { font-size: 10pt; line-height: 1.3; }
+    .form-title .form-number { font-size: 24pt; font-weight: bold; }
+    .continuation-box { border: 2px solid #000; padding: 5px 10px; font-weight: bold; font-size: 11pt; }
+    .date-br-row { display: flex; justify-content: space-between; margin-bottom: 10px; }
+    .date-boxes { display: flex; gap: 5px; align-items: center; }
+    .date-box { width: 50px; height: 24px; border: 1px solid #000; text-align: center; }
+    .br-box { width: 180px; height: 24px; border: 1px solid #000; }
+    .business-reg { text-align: right; }
+    .business-reg .label { font-size: 9pt; margin-bottom: 2px; }
+    .section-title { font-size: 11pt; font-weight: bold; margin-bottom: 5px; text-decoration: underline; }
+    .section-title .zh { margin-right: 5px; }
+    .section-title .en { font-weight: bold; }
+    .records-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .records-table th, .records-table td { border: 1px solid #000; padding: 5px; text-align: center; font-size: 9pt; }
+    .records-table th { font-weight: bold; }
+    .records-table td { height: 200px; vertical-align: top; }
+    .footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 15px; font-size: 8pt; }
+    .qr-code { width: 45px; height: 45px; border: 1px solid #000; display: flex; align-items: center; justify-content: center; font-size: 6pt; margin-bottom: 3px; }
+    .field-number-circle { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #000; color: #fff; border-radius: 50%; font-size: 8pt; font-weight: bold; margin-right: 5px; vertical-align: middle; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="form-title">
+      <div class="label"><div>表格</div><div>Form</div></div>
+      <div class="form-number">NAR1</div>
+    </div>
+    <div class="continuation-box">
+      <span class="zh">續頁 E</span>
+      <span class="en">Continuation Sheet E</span>
+    </div>
+  </div>
+
+  <div class="date-br-row">
+    <div>
+      <div style="font-size: 9pt; font-weight: bold; margin-bottom: 3px;">
+        <span class="zh">本申報表的結算日期</span>
+        <span class="en">Date to which this Return is Made Up</span>
+      </div>
+      <div class="date-boxes">
+        <div class="date-box" data-placeholder="return_date_dd"></div>
+        <span style="font-size: 9pt;"><span class="zh">日</span><span class="en">DD</span></span>
+        <div class="date-box" data-placeholder="return_date_mm"></div>
+        <span style="font-size: 9pt;"><span class="zh">月</span><span class="en">MM</span></span>
+        <div class="date-box" data-placeholder="return_date_yyyy"></div>
+        <span style="font-size: 9pt;"><span class="zh">年</span><span class="en">YYYY</span></span>
+      </div>
+    </div>
+    <div class="business-reg">
+      <div class="label"><div>商業登記號碼</div><div>Business Registration Number</div></div>
+      <div class="br-box" data-placeholder="business_registration_number"></div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <span class="field-number-circle">31</span>
+    <span class="zh">公司紀錄（第 15 項）</span>
+    <span class="en">Company Records (Section 15)</span>
+  </div>
+  <div style="font-size: 9pt; margin-bottom: 10px;">
+    <span class="zh">公司備存下列紀錄的地址(如並非備存於第 6 項所述的註冊辦事處內)</span>
+    <span class="en">Address where the following company records are kept (if not kept at the registered office stated in Section 6)</span>
+  </div>
+
+  <table class="records-table">
+    <thead>
+      <tr>
+        <th style="width: 50%;">
+          <span class="zh">公司紀錄</span>
+          <span class="en">Company Records</span>
+        </th>
+        <th style="width: 50%;">
+          <span class="zh">地址</span>
+          <span class="en">Address</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-placeholder="company_records_type"></td>
+        <td data-placeholder="company_records_address"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    <div>指明編號 2/2025 (2025 年 5 月) Specification No. 2/2025 (May 2025)</div>
+    <div style="text-align: right;">
+      <div class="qr-code">QR</div>
+    </div>
+  </div>
+</body>
+</html>

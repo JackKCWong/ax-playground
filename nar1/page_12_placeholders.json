@@ -1,0 +1,16 @@
+{
+  "business_registration_number": "12345678",
+  "return_date_dd": "31",
+  "return_date_mm": "12",
+  "return_date_yyyy": "2024",
+  "corp_secretary_name_chinese": "專業秘書服務有限公司",
+  "corp_secretary_name_english": "Professional Secretarial Services Limited",
+  "corp_secretary_address_flat": "25/F",
+  "corp_secretary_address_building": "Tower 1",
+  "corp_secretary_address_street": "1 West Kowloon Boulevard",
+  "corp_secretary_address_district": "West Kowloon",
+  "corp_secretary_email": "info@prosecretarial.com",
+  "corp_secretary_br_number": "99887766",
+  "corp_secretary_licence_no": "TC007777",
+  "corp_secretary_licence_reason": "TCSP licensed"
+}
