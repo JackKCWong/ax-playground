@@ -1,0 +1,160 @@
+{
+  "demos": [],
+  "stats": {
+    "totalCalls": 199,
+    "successfulDemos": 0,
+    "estimatedTokenUsage": 0,
+    "earlyStopped": false,
+    "resourceUsage": {
+      "totalTokens": 0,
+      "totalTime": 0,
+      "avgLatencyPerEval": 0,
+      "costByModel": {}
+    },
+    "convergenceInfo": {
+      "converged": true,
+      "finalImprovement": 0,
+      "stagnationRounds": 0,
+      "convergenceThreshold": -0.001
+    },
+    "bestScore": 0,
+    "bestConfiguration": {}
+  },
+  "bestScore": 0.5333333333333333,
+  "paretoFront": [
+    {
+      "demos": [],
+      "scores": {
+        "accuracy": 0.6666666666666666,
+        "brevity": 0.39999999999999997
+      },
+      "configuration": {
+        "candidate": 1,
+        "instructionMap": {
+          "root": "Classify emails as \"low\" priority if they are casual, promotional, or routine updates with no actionable urgency—such as lunch invitations, newsletters, or discount offers. Reserve \"normal\" priority for communications that require attention but aren’t time-sensitive, like meeting reminders or feature announcements. Clearly distinguish non-urgent content from moderately important operational messages to avoid overclassifying trivial emails as \"normal\"."
+        },
+        "instruction": "Classify emails as \"low\" priority if they are casual, promotional, or routine updates with no actionable urgency—such as lunch invitations, newsletters, or discount offers. Reserve \"normal\" priority for communications that require attention but aren’t time-sensitive, like meeting reminders or feature announcements. Clearly distinguish non-urgent content from moderately important operational messages to avoid overclassifying trivial emails as \"normal\"."
+      },
+      "dominatedSolutions": 3
+    }
+  ],
+  "paretoFrontSize": 1,
+  "hypervolume": 0.2666666666666666,
+  "finalConfiguration": {
+    "strategy": "gepa",
+    "candidates": 4,
+    "tunables": 1
+  },
+  "optimizedProgram": {
+    "bestScore": 0.5333333333333333,
+    "stats": {
+      "totalCalls": 199,
+      "successfulDemos": 0,
+      "estimatedTokenUsage": 0,
+      "earlyStopped": false,
+      "resourceUsage": {
+        "totalTokens": 0,
+        "totalTime": 0,
+        "avgLatencyPerEval": 0,
+        "costByModel": {}
+      },
+      "convergenceInfo": {
+        "converged": true,
+        "finalImprovement": 0,
+        "stagnationRounds": 0,
+        "convergenceThreshold": -0.001
+      },
+      "bestScore": 0,
+      "bestConfiguration": {}
+    },
+    "instruction": "Classify emails as \"low\" priority if they are casual, promotional, or routine updates with no actionable urgency—such as lunch invitations, newsletters, or discount offers. Reserve \"normal\" priority for communications that require attention but aren’t time-sensitive, like meeting reminders or feature announcements. Clearly distinguish non-urgent content from moderately important operational messages to avoid overclassifying trivial emails as \"normal\".",
+    "instructionMap": {
+      "root": "Classify emails as \"low\" priority if they are casual, promotional, or routine updates with no actionable urgency—such as lunch invitations, newsletters, or discount offers. Reserve \"normal\" priority for communications that require attention but aren’t time-sensitive, like meeting reminders or feature announcements. Clearly distinguish non-urgent content from moderately important operational messages to avoid overclassifying trivial emails as \"normal\"."
+    },
+    "demos": [],
+    "examples": [
+      {
+        "emailText": "URGENT: Server down!",
+        "priority": "high"
+      },
+      {
+        "emailText": "Meeting reminder for tomorrow",
+        "priority": "normal"
+      },
+      {
+        "emailText": "Weekly newsletter",
+        "priority": "low"
+      },
+      {
+        "emailText": "CRITICAL: Security breach",
+        "priority": "high"
+      },
+      {
+        "emailText": "Invoice overdue: please remit payment",
+        "priority": "high"
+      },
+      {
+        "emailText": "Lunch plans?",
+        "priority": "low"
+      },
+      {
+        "emailText": "New feature rollout announcement",
+        "priority": "normal"
+      },
+      {
+        "emailText": "Production bug impacting checkout",
+        "priority": "high"
+      },
+      {
+        "emailText": "Team offsite agenda attached",
+        "priority": "normal"
+      },
+      {
+        "emailText": "Discount code for loyal customers",
+        "priority": "low"
+      },
+      {
+        "emailText": "All-hands meeting cancelled",
+        "priority": "normal"
+      }
+    ],
+    "optimizerType": "GEPA",
+    "optimizationTime": 125099,
+    "totalRounds": 20,
+    "converged": true
+  },
+  "report": {
+    "summary": "GEPA Multi-Objective Optimization Complete",
+    "bestSolution": {
+      "overallScore": 0.5333333333333333,
+      "objectives": {
+        "accuracy": {
+          "value": 0.6666666666666666,
+          "percentage": 66.66666666666666
+        },
+        "brevity": {
+          "value": 0.39999999999999997,
+          "percentage": 40
+        }
+      }
+    },
+    "paretoFrontier": {
+      "solutionCount": 1,
+      "objectiveSpaceCoverage": 26.66666666666666,
+      "hypervolume": 0.2666666666666666
+    },
+    "statistics": {
+      "totalEvaluations": 199,
+      "candidatesExplored": 4,
+      "converged": true
+    },
+    "recommendations": {
+      "status": "single",
+      "suggestions": [
+        "Increase numTrials (current seems low)",
+        "Add more training examples",
+        "Adjust earlyStoppingTrials"
+      ]
+    }
+  }
+}

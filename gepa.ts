@@ -1,4 +1,6 @@
 import { ai, AxGEPA, ax } from '@ax-llm/ax';
+import { promises as fs } from "fs";
+
 
 // Two-objective demo: accuracy (classification) + brevity (short rationale)
 const emailClassifier = ax(
@@ -96,6 +98,16 @@ async function main() {
     console.log(`Front size: ${result.paretoFrontSize}`);
     console.log(`Hypervolume (2D): ${result.hypervolume ?? 'N/A'}`);
 
+    // Save the complete optimization result
+    await fs.writeFile(
+        "gepa-optimization.json",
+        JSON.stringify(
+            result,
+            null,
+            2,
+        ),
+    );
+
     // Show up to top 5 frontier points (by dominatedSolutions desc)
     const frontier = [...result.paretoFront]
         .sort((a, b) => (b.dominatedSolutions || 0) - (a.dominatedSolutions || 0))
@@ -131,6 +143,7 @@ async function main() {
         `\n🎯 Chosen compromise score (0.7*acc + 0.3*brev): ${bestScore.toFixed(3)}`
     );
     console.log(`Chosen configuration: ${JSON.stringify(best.configuration)}`);
+
 }
 
 main().catch((err) => {

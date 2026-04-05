@@ -119,8 +119,8 @@ const server = http.createServer(async (req, res) => {
       const result = await optimizer.compile(program, trainExamples, metric);
 
       console.log('Optimization complete!');
-      console.log(JSON.stringify(result, null, 2));
       console.log('Best score:', result.bestScore);
+      
 
       // Extract optimized instruction
       let optimizedInstruction = systemPrompt;
