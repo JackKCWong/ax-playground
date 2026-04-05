@@ -1,0 +1,739 @@
+
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAR1 Annual Return Form</title>
+    <style>
+        :root {
+            --border-color: #000;
+            --font-main: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: #fff;
+            width: 210mm; /* A4 width */
+            height: 297mm; /* A4 height - fixed */
+            padding: 10mm;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+            box-sizing: border-box;
+            overflow: hidden; /* Prevent content from spilling */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Section */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+        }
+
+        .header-center {
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .header-center h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header-center h2 {
+            margin: 5px 0 0;
+            font-size: 18px;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .form-number {
+            font-size: 32px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .br-box {
+            margin-top: 10px;
+        }
+
+        .br-label {
+            font-size: 12px;
+            text-align: right;
+            margin-bottom: 2px;
+        }
+
+        .br-input {
+            width: 200px;
+            height: 40px;
+            border: 2px solid var(--border-color);
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        /* Form Rows */
+        .form-row {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+
+        .note-col {
+            width: 30px;
+            text-align: center;
+            flex-shrink: 0;
+            padding-top: 4px;
+        }
+
+        .note-circle {
+            background-color: #000;
+            color: #fff;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .content-col {
+            flex-grow: 1;
+        }
+
+        .row-header {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .row-number {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .row-title {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .row-subtitle {
+            font-size: 11px;
+            font-style: italic;
+        }
+
+        /* Inputs */
+        .input-box {
+            border: 1px solid var(--border-color);
+            height: 24px;
+            padding: 2px 5px;
+            font-size: 12px;
+        }
+
+        .long-input {
+            width: 100%;
+            height: 40px;
+            border: 2px solid var(--border-color);
+            margin-bottom: 10px;
+        }
+
+        .long-input-lg {
+            height: 60px;
+        }
+
+        /* Checkboxes */
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 5px;
+        }
+
+        .custom-checkbox {
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--border-color);
+            margin-top: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .custom-checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            top: -4px;
+            left: 2px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* Business Nature */
+        .business-nature {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .nature-code {
+            width: 80px;
+            height: 60px;
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            font-size: 12px;
+            padding-bottom: 2px;
+        }
+
+        .nature-desc {
+            flex-grow: 1;
+            height: 60px;
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            padding: 2px;
+            font-size: 12px;
+        }
+
+        .nature-label {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        /* Date Boxes */
+        .date-group {
+            display: flex;
+            gap: 5px;
+            justify-content: flex-end;
+        }
+
+        .date-box {
+            width: 60px;
+            height: 30px;
+            border: 2px solid var(--border-color);
+            text-align: center;
+        }
+
+        .date-label-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            font-size: 12px;
+            padding-right: 5px;
+        }
+
+        .date-label {
+            width: 60px;
+            text-align: center;
+        }
+
+        /* Address Section */
+        .address-row {
+            display: flex;
+            margin-bottom: 5px;
+            align-items: flex-end;
+        }
+
+        .address-label {
+            width: 250px;
+            font-size: 12px;
+            line-height: 1.4;
+            padding-right: 10px;
+        }
+
+        .address-input {
+            flex-grow: 1;
+            height: 30px;
+            border: 2px solid var(--border-color);
+        }
+
+        .address-input-full {
+            border-top: none;
+        }
+
+        /* Footer Section */
+        .footer {
+            display: flex;
+            border-top: 2px solid var(--border-color);
+            margin-top: 20px;
+            padding-top: 10px;
+        }
+
+        .footer-left {
+            width: 50%;
+            padding-right: 10px;
+            border-right: 2px solid var(--border-color);
+        }
+
+        .footer-right {
+            width: 50%;
+            padding-left: 10px;
+            position: relative;
+            min-height: 150px;
+        }
+
+        .footer-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .presenter-form table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .presenter-form td {
+            padding: 5px 0;
+            vertical-align: top;
+            font-size: 12px;
+        }
+
+        .presenter-form td:first-child {
+            width: 100px;
+            white-space: nowrap;
+        }
+
+        .presenter-input {
+            width: 100%;
+            border-bottom: 1px solid #ccc;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            padding: 2px;
+            font-size: 12px;
+            outline: none;
+        }
+
+        .presenter-input:focus {
+            border-bottom: 1px solid #000;
+            background-color: #f9f9f9;
+        }
+
+        .qr-code {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            border: 1px solid #eee;
+        }
+
+        .spec-no {
+            text-align: center;
+            font-size: 10px;
+            margin-top: 10px;
+            border-top: 1px solid #ccc;
+            padding-top: 5px;
+        }
+
+        /* Utility */
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .mt-10 { margin-top: 10px; }
+        .mb-5 { margin-bottom: 5px; }
+        .bold { font-weight: bold; }
+        
+        /* Checkbox hidden input */
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        /* Print Styles */
+        @media print {
+            @page {
+                size: A4;
+                margin: 0;
+            }
+
+            body {
+                background-color: #fff;
+                margin: 0;
+                padding: 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .container {
+                width: 210mm;
+                height: 297mm;
+                padding: 10mm;
+                box-shadow: none;
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+
+            /* Ensure all borders print clearly */
+            input,
+            .custom-checkbox,
+            .nature-code,
+            .nature-desc,
+            .date-box,
+            .address-input,
+            .long-input,
+            .br-input,
+            .presenter-input {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            /* Hide elements that shouldn't print */
+            .note-circle {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <img src="https://bailian-bmp-pre.oss-cn-hangzhou.aliyuncs.com/public/system_agent/PlaceHolder.png" alt="CR Logo" class="logo">
+            <div>
+                <div style="font-weight:bold; font-size:14px;">公司註冊處</div>
+                <div style="font-size:14px;">Companies Registry</div>
+            </div>
+        </div>
+        <div class="header-center">
+            <h1>周年申報表</h1>
+            <h2>Annual Return</h2>
+        </div>
+        <div class="header-right">
+            <div style="display:flex; align-items:flex-end; justify-content:flex-end; gap:10px;">
+                <div style="text-align:right; margin-bottom:5px;">
+                    <div>表格</div>
+                    <div>Form</div>
+                </div>
+                <div class="form-number">NAR1</div>
+            </div>
+            <div class="br-box">
+                <div class="br-label">商業登記號碼<br>Business Registration Number</div>
+                <input type="text" class="br-input" id="brNumber">
+            </div>
+        </div>
+    </div>
+
+    <!-- Note 1 -->
+    <div class="form-row">
+        <div class="note-col">
+            <span style="font-size:12px;">註 Note</span>
+        </div>
+        <div class="content-col">
+            <div class="row-header">
+                <span class="row-number">1</span>
+                <span class="row-title">公司名稱 Company Name</span>
+            </div>
+            <input type="text" class="long-input long-input-lg" id="companyName">
+        </div>
+    </div>
+
+    <!-- Note 8 -->
+    <div class="form-row">
+        <div class="note-col">
+            <div class="note-circle">8</div>
+        </div>
+        <div class="content-col">
+            <div class="row-header">
+                <span class="row-number">2</span>
+                <span class="row-title">商業名稱(如有的話) Business Name (If any)</span>
+            </div>
+            <input type="text" class="long-input" id="businessName">
+        </div>
+    </div>
+
+    <!-- Note 9 -->
+    <div class="form-row">
+        <div class="note-col">
+            <div class="note-circle">9</div>
+        </div>
+        <div class="content-col">
+            <div class="row-header">
+                <span class="row-number">3</span>
+                <span class="row-title">公司類別 Type of Company</span>
+            </div>
+            <div class="row-subtitle mb-5">請在適用的空格內加上 ✓ 號 Please tick the relevant box</div>
+            
+            <div class="checkbox-group">
+                <label class="checkbox-item">
+                    <input type="checkbox" id="typePrivate">
+                    <div class="custom-checkbox" id="chkPrivate"></div>
+                    <span>私人公司<br>Private company</span>
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" id="typePublic">
+                    <div class="custom-checkbox" id="chkPublic"></div>
+                    <span>公眾公司<br>Public company</span>
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" id="typeGuarantee">
+                    <div class="custom-checkbox" id="chkGuarantee"></div>
+                    <span>擔保有限公司<br>Company limited by guarantee</span>
+                </label>
+            </div>
+
+            <div class="row-header">
+                <span class="row-title">經營業務性質<br>Business Nature</span>
+            </div>
+            <div class="business-nature">
+                <div>
+                    <div class="nature-code" id="natureCodeBox"></div>
+                    <div class="nature-label">編碼 Code</div>
+                    <input type="text" id="natureCodeInput" style="display:none;"> <!-- Hidden logic, just visual -->
+                </div>
+                <div style="flex-grow:1;">
+                    <div class="nature-desc" id="natureDescBox"></div>
+                    <div class="nature-label" style="text-align:right;">描述 Description</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Note 10 -->
+    <div class="form-row">
+        <div class="note-col">
+            <div class="note-circle">10</div>
+        </div>
+        <div class="content-col">
+            <div class="row-header">
+                <span class="row-number">4</span>
+                <span class="row-title">本申報表的結算日期<br>Date to which this Return is Made Up</span>
+            </div>
+            <div class="date-group">
+                <input type="text" class="date-box" maxlength="2" id="dateDD1">
+                <input type="text" class="date-box" maxlength="2" id="dateMM1">
+                <input type="text" class="date-box" maxlength="4" id="dateYYYY1">
+            </div>
+            <div class="date-label-row">
+                <div class="date-label">日 DD</div>
+                <div class="date-label">月 MM</div>
+                <div class="date-label">年 YYYY</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Note 11 -->
+    <div class="form-row">
+        <div class="note-col">
+            <div class="note-circle">11</div>
+        </div>
+        <div class="content-col">
+            <div class="row-header">
+                <span class="row-number">5</span>
+                <span class="row-title">隨本表格交付的財務報表所涵蓋的會計期<br>Period Covered by Financial Statements Delivered with this Form</span>
+            </div>
+            <div class="row-subtitle mb-5">(私人公司無需填報此項 A private company needs not complete this section)</div>
+            
+            <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+                <div>
+                    <div class="date-group" style="justify-content:flex-start;">
+                        <input type="text" class="date-box" id="dateDD2">
+                        <input type="text" class="date-box" id="dateMM2">
+                        <input type="text" class="date-box" id="dateYYYY2">
+                    </div>
+                    <div class="date-label-row" style="justify-content:flex-start;">
+                        <div class="date-label">日 DD</div>
+                        <div class="date-label">月 MM</div>
+                        <div class="date-label">年 YYYY</div>
+                    </div>
+                </div>
+                <div style="font-weight:bold; margin-right:20px;">至<br>To</div>
+                <div>
+                    <div class="date-group" style="justify-content:flex-start;">
+                        <input type="text" class="date-box" id="dateDD3">
+                        <input type="text" class="date-box" id="dateMM3">
+                        <input type="text" class="date-box" id="dateYYYY3">
+                    </div>
+                    <div class="date-label-row" style="justify-content:flex-start;">
+                        <div class="date-label">日 DD</div>
+                        <div class="date-label">月 MM</div>
+                        <div class="date-label">年 YYYY</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Note 12 -->
+    <div class="form-row">
+        <div class="note-col">
+            <div class="note-circle">12</div>
+        </div>
+        <div class="content-col">
+            <div class="row-header">
+                <span class="row-number">6</span>
+                <span class="row-title">在香港的註冊辦事處地址 Address of Registered Office in Hong Kong</span>
+            </div>
+            
+            <div class="address-row">
+                <div class="address-label">室 / 樓 / 座等<br>Flat / Floor / Block etc.</div>
+                <input type="text" class="address-input" id="addrFlat">
+            </div>
+            <div class="address-row">
+                <div class="address-label">大廈<br>Building</div>
+                <input type="text" class="address-input address-input-full" id="addrBuilding">
+            </div>
+            <div class="address-row">
+                <div class="address-label">街道 / 屋苑 / 地段 / 村等<br>Street / Estate / Lot / Village etc.</div>
+                <input type="text" class="address-input address-input-full" id="addrStreet">
+            </div>
+            <div class="address-row">
+                <div class="address-label">區<br>District</div>
+                <input type="text" class="address-input address-input-full" id="addrDistrict">
+            </div>
+            <div class="address-row">
+                <div class="address-label">地區<br>Region</div>
+                <div style="flex-grow:1; height:30px; border:2px solid #000; display:flex; align-items:center; padding-left:10px;">
+                    香港 / HONG KONG
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-left">
+            <div class="footer-title">提交人資料 Presentor's Reference</div>
+            <div class="presenter-form">
+                <table>
+                    <tr>
+                        <td>姓名 / 名稱 Name:</td>
+                        <td><input type="text" class="presenter-input" id="presenterName"></td>
+                    </tr>
+                    <tr>
+                        <td>地址 Address:</td>
+                        <td>
+                            <input type="text" class="presenter-input" id="presenterAddr1"><br>
+                            <input type="text" class="presenter-input" id="presenterAddr2"><br>
+                            <input type="text" class="presenter-input" id="presenterAddr3">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>電話 Tel:</td>
+                        <td><input type="text" class="presenter-input" id="presenterTel"></td>
+                    </tr>
+                    <tr>
+                        <td>傳真 Fax:</td>
+                        <td><input type="text" class="presenter-input" id="presenterFax"></td>
+                    </tr>
+                    <tr>
+                        <td>電郵 Email:</td>
+                        <td><input type="text" class="presenter-input" id="presenterEmail"></td>
+                    </tr>
+                    <tr>
+                        <td>檔號 Reference:</td>
+                        <td><input type="text" class="presenter-input" id="presenterRef"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="footer-right">
+            <div class="footer-title">請勿填寫本欄 For Official Use</div>
+            <img src="https://bailian-bmp-pre.oss-cn-hangzhou.aliyuncs.com/public/system_agent/PlaceHolder.png" alt="QR Code" class="qr-code">
+        </div>
+    </div>
+
+    <div class="spec-no">
+        指明編號 2/2025 (2025 年 5 月) Specification No. 2/2025 (May 2025)
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Custom Checkboxes Logic
+        const checkboxes = [
+            { inputId: 'typePrivate', boxId: 'chkPrivate' },
+            { inputId: 'typePublic', boxId: 'chkPublic' },
+            { inputId: 'typeGuarantee', boxId: 'chkGuarantee' }
+        ];
+
+        checkboxes.forEach(item => {
+            const input = document.getElementById(item.inputId);
+            const box = document.getElementById(item.boxId);
+
+            input.addEventListener('change', function() {
+                if (this.checked) {
+                    box.classList.add('checked');
+                } else {
+                    box.classList.remove('checked');
+                }
+            });
+
+            // Click on box toggles checkbox
+            box.addEventListener('click', () => {
+                input.checked = !input.checked;
+                input.dispatchEvent(new Event('change'));
+            });
+        });
+
+        // Business Nature Input Simulation (Simple focus interaction)
+        const natureCodeBox = document.getElementById('natureCodeBox');
+        const natureDescBox = document.getElementById('natureDescBox');
+
+        // Allow typing in these boxes by creating temporary inputs or just visual feedback
+        // For a pure HTML recreation, usually these are just lines, but let's make them clickable
+        
+        // Add visual focus effect
+        natureCodeBox.addEventListener('click', () => {
+            natureCodeBox.style.backgroundColor = '#f0f8ff';
+            natureCodeBox.style.cursor = 'text';
+        });
+        
+        natureDescBox.addEventListener('click', () => {
+            natureDescBox.style.backgroundColor = '#f0f8ff';
+            natureDescBox.style.cursor = 'text';
+        });
+
+        // Date inputs auto-focus next logic (optional enhancement)
+        const dateInputs = document.querySelectorAll('.date-box');
+        dateInputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === e.target.maxLength && index < dateInputs.length - 1) {
+                    dateInputs[index + 1].focus();
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
